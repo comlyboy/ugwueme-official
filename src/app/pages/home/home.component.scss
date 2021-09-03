@@ -38,6 +38,10 @@ p {
 
 @media(max-width: 768px) {
 
+    p{
+        font-size: 14px;
+    }
+
     .title {
         // margin-top: 20px;
         padding-bottom: 10px;
@@ -51,6 +55,9 @@ p {
 }
 
 @media (min-width: 992px) {
+    .card-title{
+        margin-top: 18px;
+    }
     .title {
         font-size: 38px;
         // line-height: 1.4;
