@@ -1,22 +1,3 @@
-/* Table of contents */
-/*        General */
-/* 1..... Top-Navigaton */
-/* 2..... Intro */
-/* 3..... About */
-/* 4..... Skills */
-/* 5..... Portfolio */
-/* 6..... Contact form */
-/* -------------------------------------------------------------------------------- */
-
-/* General */
-// body {
-//     font-family: Arial, Helvetica, sans-serif;
-//     font-size: 14px;
-//     background-color: #ffffff;
-//     margin: 0;
-//     padding: 0;
-// }
-
 h1 {
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
@@ -26,187 +7,52 @@ h1 {
     font-size: 50px;
 }
 
-.container {
-    width: 90%;
-    margin: auto;
-    overflow: hidden;
-    // background-color: rgb(255, 255, 255)
-}
 
 
-.container h2 {
-    text-align: center;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 40px;
-}
-
-
-/* Top-Navigation */
-#nav {
-    // background-color: #ffffff;
-    border-bottom: #9d3f3f 4px;
-    padding: 17px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    /* padding-bottom: 40px; */
-    /* border-bottom: #f7f7f7 solid 5px; */
-    /* border-bottom: #dadada solid; */
-    z-index: 9999999;
-
-
-
-    a {
-        color: #3d2626;
-        text-decoration: none;
-        text-transform: uppercase;
-        font-family: sans-serif;
-        margin-top: 15px;
-        margin-bottom: 5px;
-        font-weight: 600;
-    }
-
-    ul {
-        padding: 10px;
-        margin: 0;
-        text-align: center;
-    }
-
-    li {
-        display: inline;
-        padding: 15px;
-    }
-
-    a:hover {
-        border-bottom: #9d3f3f solid 2px;
-        transition: .3s;
-        padding-bottom: 3px;
-    }
-}
-
-/* Intro section */
-
-
-
-
-
-
-/* About section */
-
-#about {
-    margin-top: 20px;
-    padding: 0px;
-}
-
-#about .box {
-    float: left;
-    width: 45%;
-    text-align: center;
-    margin-right: 30px;
-
-}
-
-#about .box img {
-    max-width: 400px;
-    max-height: 550px;
-    border-radius: 70px;
-    margin-top: 10px;
-    margin-left: 40px;
-    transition: 10s;
-    /* position: relative; */
-}
-
-#about .box img:hover {
-    max-width: 600px;
-    max-height: 630px;
-    border-radius: 10px;
-    transition: .7s ease-in-out;
-    /* border-radius: 9px; */
-}
-
-
-#about .title {
+.title {
     font-size: 48px;
     font-weight: normal;
     line-height: 2;
     border-bottom: #9d3f3f solid 2px;
     margin-bottom: 50px;
-    transition-duration: 3s;
+    // transition-duration: 3s;
     padding-top: 30px;
 }
 
-#about .box p {
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #9d3f3f;
+}
+
+
+p {
     text-align: justify;
-    line-height: 1.5;
-}
-
-.container-about {
-    width: 100%;
-    overflow: hidden;
-    background-color: rgba(243, 243, 243, 0.313);
-    padding: 10px;
 
 }
-
 
 /* Media queries here */
 
 @media(max-width: 768px) {
 
-    #nav,
-    #nav li {
-        float: none;
-        text-align: center;
-        width: 100%;
-        /* margin-bottom: 20px; */
-        /* padding: 0; */
-        line-height: 2;
-
-    }
-
-    #about .title {
-        margin-top: 70px;
-        padding-top: 40px;
+    .title {
+        // margin-top: 20px;
+        padding-bottom: 10px;
+        // padding-top: 20px;
         text-align: center;
         width: 100%;
         font-size: 30px;
-        line-height: 1.1;
+        line-height: 1.2;
     }
 
-    #about .box p {
-        padding: 0;
-        margin-left: 5px;
-        width: 100%
-    }
+}
 
-    #about .box {
-        /* max-width: 400px;
-        max-height: 350px;
-        border-radius: 150px;
-        margin-top: 25px;
-        margin-left: 17px;
-        position: relative; */
-        /* align-content: center; */
-        /* text-align: center; */
-        width: 90%;
-        margin: 0;
-        padding: 0;
+@media (min-width: 992px) {
+    .title {
+        font-size: 38px;
+        // line-height: 1.4;
     }
-
-    #about .box img {
-        max-width: auto;
-        max-height: 300px;
-        border-radius: 15px;
-        margin-top: 25px;
-        margin-left: 17px;
-    }
-
-    #about .box img:hover {
-        max-width: auto;
-        max-height: 300px;
-        border-radius: 10px;
-        margin-top: 25px;
-        margin-left: 17px;
-    }
-
 }
