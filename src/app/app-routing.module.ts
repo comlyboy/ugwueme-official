@@ -7,8 +7,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module')
       .then(m => m.HomeModule)
   },
+  {
+    path: 'fuuga',
+    loadChildren: () => import('./pages/fuuga/fuuga.module')
+      .then(m => m.FuugaModule)
+  },
 
-  
+
   { path: '**', redirectTo: '', pathMatch: 'full' }
 
 ];
