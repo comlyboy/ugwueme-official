@@ -16,7 +16,7 @@ export class NavigationService {
 
 
   goToLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/fuuga/login']);
   }
 
   goToRegister() {

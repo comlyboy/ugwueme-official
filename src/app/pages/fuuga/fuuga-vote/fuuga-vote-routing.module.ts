@@ -8,6 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
+    // canLoad: [AuthGuard],
     loadChildren: () => import('./fuuga-vote-dashboard/fuuga-vote-dashboard.module')
       .then(m => m.FuugaVoteDashboardModule)
   },

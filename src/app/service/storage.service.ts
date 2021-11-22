@@ -83,9 +83,7 @@ export class StorageService {
  */
   removeAuthData() {
     localStorage.removeItem('token');
-    localStorage.removeItem('branch');
-    localStorage.removeItem('loggedUser');
-    localStorage.removeItem('loggedUserType');
+    localStorage.removeItem('user');
   }
 
 }

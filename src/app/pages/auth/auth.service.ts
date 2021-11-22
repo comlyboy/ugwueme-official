@@ -77,7 +77,10 @@ export class AuthService {
   loginUser(userSignInDto: UserSignInDto) {
 
     if (this.userIsAuthenticated) {
-      return this.notificationsService.notify('A user already Authenticated', 'info');
+      this.notificationsService.notify('A user already Authenticated', 'info');
+
+      this.navigationService.goToDashboard();
+      return;
     }
 
     this.http.post<{ message: string, data: { token: string, user: IUser } }>(`${this.API_URL}user/login`, userSignInDto)
@@ -92,7 +95,7 @@ export class AuthService {
           return this.notificationsService.notify(`Login not successful!!!`);
         }
 
-        this.notificationsService.notify(response.message);
+        // this.notificationsService.notify(response.message);
         this.userIsAuthenticated = true;
         this.saveAuthenticationData(token, user);
         this.authenticationStatusListener.next(true);
