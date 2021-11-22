@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { FuugaVoteComponent } from './fuuga-vote.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: FuugaVoteComponent
-  }
+    path: '', redirectTo: 'dashboard', pathMatch: 'full'
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./fuuga-vote-dashboard/fuuga-vote-dashboard.module')
+      .then(m => m.FuugaVoteDashboardModule)
+  },
 ];
 
 @NgModule({

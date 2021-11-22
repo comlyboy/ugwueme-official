@@ -63,7 +63,7 @@ export class AuthService {
 
         this.notificationsService.notify(response.message);
 
-        this.navigationService.goToLogin();
+        this.navigationService.goToDashboard();
       }, error => {
         this.authenticationStatusListener.next(false);
         // this.notificationsService.notify(error.message, `error`);
