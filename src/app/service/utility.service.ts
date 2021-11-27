@@ -13,7 +13,7 @@ export class UtilityService {
   }
 
 
-  setPageTitle(pageTitle: string, withBranchName = false) {
+  setPageTitle(pageTitle: string) {
     this.title.setTitle(`${pageTitle} - Ugwueme Autonomous Community`);
   }
 

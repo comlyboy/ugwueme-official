@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UtilityService } from 'src/app/service/utility.service';
+
 @Component({
   selector: 'app-fuuga-vote-dashboard',
   templateUrl: './fuuga-vote-dashboard.component.html',
@@ -25,9 +27,12 @@ export class FuugaVoteDashboardComponent implements OnInit {
 
   completionRatePercentage = 0;
 
-  constructor() { }
+  constructor(
+    private utilityService: UtilityService
+  ) { }
 
   ngOnInit(): void {
+    this.utilityService.setPageTitle('FUUGA voting dashboard')
   }
 
 }

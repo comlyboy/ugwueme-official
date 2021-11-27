@@ -12,7 +12,7 @@ const routes: Routes = [
       .then(m => m.FuugaHomeModule)
   },
    {
-    path: 'voting',
+    path: 'election',
     loadChildren: () => import('./fuuga-vote/fuuga-vote.module')
       .then(m => m.FuugaVoteModule)
   },

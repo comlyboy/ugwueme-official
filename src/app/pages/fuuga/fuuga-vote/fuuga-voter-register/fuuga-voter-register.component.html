@@ -1,0 +1,111 @@
+<section class="wrapper">
+    <div class="py-3 text-center">
+        <img class="logoo" src="../../../../assets/images/ugwueme_social_flyer.png" alt="" srcset="">
+    </div>
+
+    <div class="content">
+        <header>
+            <h3 class="text-handy mb-0">Register as a voter</h3>
+        </header>
+        <form (submit)="onRegisterVoter(registerForm)" #registerForm="ngForm" class="sign-up-form">
+            <section class="mt-4">
+                <div class="form-floating">
+                    <input
+                        [ngClass]="{'is-invalid animate__animated animate__headShake': firstName.touched && firstName.invalid}"
+                        class="form-control" id="floatingInput" type="text" name="inputFirstName" ngModel
+                        placeholder="Firstname" #firstName="ngModel" minlength="3" autocomplete="off" required />
+                    <label for="floatingInput">Firstname</label>
+                </div>
+                <div class="mb-1 text-center" *ngIf="firstName.touched && firstName.invalid">
+                    <small *ngIf="firstName.errors?.required" class="text-danger">This field is required.</small>
+                    <small *ngIf="firstName.touched && firstName.errors?.minlength" class="text-danger"> Minimum
+                        3
+                        characters
+                    </small>
+                </div>
+
+
+                <div class="form-floating mt-3">
+                    <input
+                        [ngClass]="{'is-invalid animate__animated animate__headShake': surName.touched && surName.invalid}"
+                        class="form-control" id="floatingInput" type="text" name="inputSurName" ngModel
+                        placeholder="Firstname" #surName="ngModel" minlength="3" autocomplete="off" required />
+                    <label for="floatingInput">Surname</label>
+                </div>
+                <div class="mb-1 text-center" *ngIf="surName.touched && surName.invalid">
+                    <small *ngIf="surName.errors?.required" class="text-danger"> This field is required.</small>
+                    <small *ngIf="surName.touched && surName.errors?.minlength" class="text-danger"> Minimum
+                        3
+                        characters
+                    </small>
+                </div>
+
+
+                <div class="form-floating mt-3">
+                    <input
+                        [ngClass]="{'is-invalid animate__animated animate__headShake': school.touched && school.invalid}"
+                        class="form-control" id="floatingInput" type="text" name="inputSchool" ngModel
+                        placeholder="Username" #school="ngModel" minlength="3" autocomplete="off" required />
+                    <label for="floatingInput">School - eg UNN, UNIZIK, IMT</label>
+                </div>
+                <div class="mb-1 text-center" *ngIf="school.touched && school.invalid">
+                    <small *ngIf="school.errors?.required" class="text-danger"> This field is required.</small>
+                    <small *ngIf="school.touched && school.errors?.minlength" class="text-danger"> Minimum
+                        3
+                        characters
+                    </small>
+                </div>
+
+
+                <div class="form-floating mt-3">
+                    <input [disabled]="school.invalid!"
+                        [ngClass]="{'is-invalid animate__animated animate__headShake': schLevel.touched && schLevel.invalid}"
+                        class="form-control" id="floatingInput" type="text" name="inputSchLevel" ngModel
+                        placeholder="Level" #schLevel="ngModel" minlength="2" autocomplete="off" required />
+                    <label for="floatingInput">Level - eg HND, 300L, OND etc</label>
+                </div>
+                <div class="mb-1 text-center" *ngIf="schLevel.touched && schLevel.invalid">
+                    <small *ngIf="schLevel.errors?.required" class="text-danger"> This field is required.</small>
+                    <small *ngIf="schLevel.touched && schLevel.errors?.minlength" class="text-danger"> Minimum
+                        2
+                        characters
+                    </small>
+                </div>
+
+
+                <!-- <div class="form-floating mt-4">
+                    <input
+                        [ngClass]="{'is-invalid animate__animated animate__headShake': password2.touched && password2.invalid || !isPasswordMatch}"
+                        class="form-control" id="floatingInput" (keyup)="onMatchPassword(registerForm)" type="password"
+                        nxame="inputPassword2" ngModel minlength="6" placeholder="Password" #password2="ngModel"
+                        required />
+                    <label for="floatingInput">Password</label>
+                </div>
+                <div class="mb-1 text-center" *ngIf="password2.touched && password2.invalid">
+                    <small *ngIf="password2.errors?.required" class="text-danger"> This field is required.</small>
+                </div>
+                <div class="mb-1 text-center" *ngIf="!isPasswordMatch">
+                    <small class="text-center text-danger">Passwords must be identical</small>
+                </div>
+ -->
+
+
+                <div class="text-center mt-3">
+                    <small class="mb-2">By signing up signifies that you are an undergraduation from Ugwueme community of Agwu LGA and that you have interest in voting in FUUGA forthcoming election.
+                    </small>
+                    <br>
+                    <br>
+                    <small class="mt-2">Under no circumstance should you register if you are not a member of FUUGA or if you are are not origin to our great community Ugwueme
+                    </small>
+                </div>
+
+            </section>
+            <footer>
+                <button [disabled]="registerForm.invalid" type="submit"
+                    class="btn btn-lg text-uppercase border-radius btn-handy mt-2 w-75 ripple-effect">register</button>
+
+            </footer>
+        </form>
+
+    </div>
+</section>
