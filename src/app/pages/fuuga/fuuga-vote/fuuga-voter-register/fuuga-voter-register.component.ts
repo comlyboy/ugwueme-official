@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { FuugaVoteService } from '../fuuga-vote.service';
 
+import { UtilityService } from 'src/app/service/utility.service';
+import { FuugaVoteService } from '../fuuga-vote.service';
 import { VoterDto } from '../fuuga-voter/fuuga-voter.interface';
 
 @Component({
@@ -12,7 +13,8 @@ import { VoterDto } from '../fuuga-voter/fuuga-voter.interface';
 export class FuugaVoterRegisterComponent implements OnInit {
 
   constructor(
-    private fuugaVoteService: FuugaVoteService
+    private fuugaVoteService: FuugaVoteService,
+    private utilityService: UtilityService
   ) { }
 
 
@@ -31,6 +33,7 @@ export class FuugaVoterRegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.utilityService.setPageTitle('Voters registration • FUUGA')
   }
 
 }
