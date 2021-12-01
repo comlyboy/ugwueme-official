@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'dashboard', pathMatch: 'full'
+    path: '', redirectTo: 'login', pathMatch: 'full'
   },
   // {
   //   path: 'voter/register',
@@ -24,11 +25,40 @@ const routes: Routes = [
       }
     ]
   },
+  // {
+  //   path: 'register',
+  //   loadChildren: () => import('../../auth/signup/signup.module')
+  //     .then(m => m.SignupModule)
+  // },
+  {
+    path: 'login',
+    loadChildren: () => import('../../auth/login/login.module')
+      .then(m => m.LoginModule)
+  },
+
   {
     path: 'dashboard',
-    // canLoad: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: () => import('./fuuga-vote-dashboard/fuuga-vote-dashboard.module')
       .then(m => m.FuugaVoteDashboardModule)
+  },
+  {
+    path: 'voters',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./fuuga-voter/fuuga-voter.module')
+      .then(m => m.FuugaVoterModule)
+  },
+  {
+    path: 'votes',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./fuuga-votes/fuuga-votes.module')
+      .then(m => m.FuugaVotesModule)
+  },
+  {
+    path: 'condidates',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./fuuga-vote-candidate/fuuga-vote-candidate.module')
+      .then(m => m.FuugaVoteCandidateModule)
   },
 
 ];

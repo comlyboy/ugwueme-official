@@ -8,7 +8,6 @@ import { Subject } from 'rxjs';
 })
 export class NavigationService {
 
-  urlListener = new Subject<string>();
 
   constructor(
     private router: Router
@@ -16,7 +15,7 @@ export class NavigationService {
 
 
   goToLogin() {
-    this.router.navigate(['/fuuga/login']);
+    this.router.navigate(['/fuuga/election']);
   }
 
   goToRegister() {
@@ -24,14 +23,10 @@ export class NavigationService {
   }
 
   goToDashboard() {
-    this.router.navigate(['/fuuga/voting']);
+    this.router.navigate(['/fuuga/election/dashboard']);
   }
 
 
-
-  toggleSidenavSubject(url: string) {
-    this.urlListener.next(url);
-  }
 
 
 }

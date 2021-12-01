@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { FuugaVoterListComponent } from './fuuga-voter-list.component';
+import { FuugaVotesComponent } from './fuuga-votes.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: FuugaVoterListComponent
+    component: FuugaVotesComponent
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class FuugaVoterListRoutingModule { }
+export class FuugaVotesRoutingModule { }

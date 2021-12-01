@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FuugaVoterListComponent } from './fuuga-voter-list.component';
+import { FuugaVoteCandidateComponent } from './fuuga-vote-candidate.component';
 
-describe('FuugaVoterListComponent', () => {
-  let component: FuugaVoterListComponent;
-  let fixture: ComponentFixture<FuugaVoterListComponent>;
+describe('FuugaVoteCandidateComponent', () => {
+  let component: FuugaVoteCandidateComponent;
+  let fixture: ComponentFixture<FuugaVoteCandidateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FuugaVoterListComponent ]
+      declarations: [ FuugaVoteCandidateComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FuugaVoterListComponent);
+    fixture = TestBed.createComponent(FuugaVoteCandidateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

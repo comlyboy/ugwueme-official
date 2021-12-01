@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FuugaVoteService } from '../fuuga-vote.service';
 
-import { VoterDto } from '../fuuga-voter-list/fuuga-voter.interface';
+import { VoterDto } from '../fuuga-voter/fuuga-voter.interface';
 
 @Component({
   selector: 'app-fuuga-voter-register',

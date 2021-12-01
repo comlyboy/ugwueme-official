@@ -3,15 +3,13 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { StorageService } from '../../service/storage.service';
 import { NavigationService } from '../../service/navigation.service';
 import { NotificationService } from '../../components/notification/notification.service';
 import { UserSignInDto, UserSignUpDto } from './user.dto';
 import { IUser } from './user.interface';
-// import { UserSignUpDto, UserSignInDto } from '../user/user.dto';
-// import { IUser, UserTypeEnum } from '../user/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +22,6 @@ export class AuthService {
   private userId?: string;
 
   authenticationStatusListener = new Subject<boolean>();
-
 
   constructor(
     private http: HttpClient,
