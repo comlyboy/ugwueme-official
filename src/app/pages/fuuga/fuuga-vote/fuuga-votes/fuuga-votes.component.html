@@ -1,1 +1,13 @@
-<p>fuuga-votes works!</p>
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb ps-3 py-4 mb-0">
+            <!-- <a class="breadcrumb-item text-handy h5 mb-0" routerLink="/fuuga" aria-current="page">Fuuga
+            </a>
+            <a class="breadcrumb-item text-handy h5 mb-0" routerLink="/fuuga/election/dashboard" aria-current="page">Election
+            </a> -->
+            <li class="breadcrumb-item active h5 mb-0" aria-current="page">Votes
+                <span class="ms-2 badge bg-handy">{{ totalVotes | number}}</span>
+            </li>
+        </ol>
+    </nav>
+</div>

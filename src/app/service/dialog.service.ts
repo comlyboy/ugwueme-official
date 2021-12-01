@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 
 import Swal from 'sweetalert2';
 
-import { BranchService } from '../pages/branch/branch.service';
-import { ServiceRecordService } from '../pages/customer-care/service-record/service-secord.service';
-import { RepairCustomerService } from '../pages/engineering/repair-customer/repair-customer.service';
-import { RepairRecordService } from '../pages/engineering/repair-record/repair-record.service';
-import { UserService } from '../pages/user/user.service';
+import { FuugaVoteService } from '../pages/fuuga/fuuga-vote/fuuga-vote.service';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,62 +12,58 @@ import { UserService } from '../pages/user/user.service';
 export class DialogService {
 
   constructor(
-    private branchService: BranchService,
-    private repairCustomerService: RepairCustomerService,
-    private repairRecordService: RepairRecordService,
-    private serviceRecordService: ServiceRecordService,
-    private userService: UserService
+    private fuugaVoteService: FuugaVoteService,
   ) { }
 
 
-  async branchDeleteDialog(branchId: string, name: string) {
+  async verifyVoterDialog(voterId: string) {
     try {
-      const result = await this.OpenDialog('Delete branch?');
+      const result = await this.OpenDialog('You sure you want to verify this voter?');
       if (result.value) {
-        this.branchService.deleteBranch(branchId);
+        this.fuugaVoteService.verifyVoter(voterId);
       }
     } catch (error) { }
   }
 
 
-  async deleteCustomerDialog(customerId: string) {
-    try {
-      const result = await this.OpenDialog('Delete customer?');
-      if (result.value) {
-        this.repairCustomerService.deleteCustomer(customerId);
-      }
-    } catch (error) { }
-  }
+  // async deleteCustomerDialog(customerId: string) {
+  //   try {
+  //     const result = await this.OpenDialog('Delete customer?');
+  //     if (result.value) {
+  //       this.repairCustomerService.deleteCustomer(customerId);
+  //     }
+  //   } catch (error) { }
+  // }
 
 
-  async deleteRepairRecordDialog(transactionId: string) {
-    try {
-      const result = await this.OpenDialog('Delete transaction?');
-      if (result.value) {
-        this.repairRecordService.deleteTransaction(transactionId);
-      }
-    } catch (error) { }
-  }
+  // async deleteRepairRecordDialog(transactionId: string) {
+  //   try {
+  //     const result = await this.OpenDialog('Delete transaction?');
+  //     if (result.value) {
+  //       this.repairRecordService.deleteTransaction(transactionId);
+  //     }
+  //   } catch (error) { }
+  // }
 
 
-  async deleteServiceRecordDialog(recordId: string) {
-    try {
-      const result = await this.OpenDialog('Delete Service record?');
-      if (result.value) {
-        this.serviceRecordService.deleteRecord(recordId);
-      }
-    } catch (error) { }
-  }
+  // async deleteServiceRecordDialog(recordId: string) {
+  //   try {
+  //     const result = await this.OpenDialog('Delete Service record?');
+  //     if (result.value) {
+  //       this.serviceRecordService.deleteRecord(recordId);
+  //     }
+  //   } catch (error) { }
+  // }
 
 
-  async withdrawUserInvitationDialog(invitationId: string) {
-    try {
-      const result = await this.OpenDialog('Withdraw invitation?');
-      if (result.isConfirmed) {
-        this.userService.withdrawUserInvitation(invitationId);
-      }
-    } catch (error) { }
-  }
+  // async withdrawUserInvitationDialog(invitationId: string) {
+  //   try {
+  //     const result = await this.OpenDialog('Withdraw invitation?');
+  //     if (result.isConfirmed) {
+  //       this.userService.withdrawUserInvitation(invitationId);
+  //     }
+  //   } catch (error) { }
+  // }
 
 
 
@@ -77,7 +71,7 @@ export class DialogService {
   private async OpenDialog(title: string) {
     return Swal.mixin({
       customClass: {
-        confirmButton: 'btn btn-danger w-50 bg-danger',
+        confirmButton: 'btn btn-danger bg-danger',
         cancelButton: 'btn btn-secondary'
       },
       buttonsStyling: true

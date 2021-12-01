@@ -1,0 +1,10 @@
+<nav class="toolbar fixed-bottom bg-white">
+    <div class="d-flex align-items-center justify-content-around">
+        <a *ngFor="let page of pages" class="text-center" [routerLink]="[page.link]" routerLinkActive="current">
+            <div class="icon">
+                <i class="bi bi-{{ page.icon }}"></i>
+            </div>
+            <div class="navi-text">{{ page.title }}</div>
+        </a>
+    </div>
+</nav>

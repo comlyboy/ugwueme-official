@@ -1,1 +1,129 @@
-<p>fuuga-voter works!</p>
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb ps-3 py-4 mb-0">
+            <!-- <a class="breadcrumb-item text-handy h5 mb-0" routerLink="/fuuga" aria-current="page">Fuuga
+            </a>
+            <a class="breadcrumb-item text-handy h5 mb-0" routerLink="/fuuga/election/dashboard" aria-current="page">Election
+            </a> -->
+            <li class="breadcrumb-item active h5 mb-0" aria-current="page">Voters
+                <span class="ms-2 badge bg-handy">{{ totalVoters | number}}</span>
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div *ngFor="let voter of voters" class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="card handy-card mb-2">
+                <div class="card-body px-3">
+                    <div class="d-flex justify-content-between">
+                        <h5 (click)="onSelectVoter(voter._id)" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            class="text-handy pointer text-truncate">{{
+                            voter.firstName |
+                            titlecase }} {{ voter.surName | titlecase }}<span>
+                                <i class="bi bi-arrow-up-right-circle ms-2"></i></span></h5>
+
+                        <div class="text-end">
+                            <div class="btn-group">
+                                <h6 data-bs-toggle="dropdown" data-display="static" aria-haspopup="true"
+                                    aria-expanded="false" class="text-muted pointer"> <i
+                                        class="bi bi-three-dots-vertical"></i>
+                                </h6>
+                                <div class="dropdown-menu handy-card dropdown-menu-right">
+                                    <button (click)="onVerifyVoter(voter._id)" class="dropdown-item py-2"
+                                        type="button">Verify voter</button>
+                                    <!-- <hr class="m-0"> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <h6 class="mb-0 text-muted">{{ voter.schoolName | titlecase }} </h6>
+                        <small class="mb-0 text-muted">{{ voter.kindred | titlecase }} </small>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-0 text-muted">{{ voter.schoolLevel | titlecase }}</h6>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template [ngIf]="voters.length <= 0">
+        <p>No voters to show...</p>
+    </ng-template>
+
+</div>
+
+
+
+<div class="container mt-3 footer-clearfix">
+    <app-paginator [length]="totalVoters" [currentDataLength]="voters.length" [dataPerPage]="votersPerPage"
+        [currentPage]="currentPage" (pageChange)='onChangePage($event)'>
+    </app-paginator>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-radius">
+            <div class="modal-header">
+                <h5 class="modal-title text-handy">{{ voter?.firstName | titlecase }} {{ voter?.surName | titlecase }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-body px-0 pb-4">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Full name</h6>
+                        <h6 class="text-handy mb-1">{{ voter?.firstName | titlecase }} {{ voter?.surName | titlecase }}
+                        </h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Kindred</h6>
+                        <h6 class="text-handy mb-1">{{ voter?.kindred | titlecase }} </h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">School</h6>
+                        <h6 class="text-handy mb-1">{{ voter?.schoolName | titlecase }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Level in school</h6>
+                        <h6 class="text-handy mb-1">{{ voter?.schoolLevel | titlecase }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Registered at</h6>
+                        <h6 class="text-handy mb-1">{{ voter?.registeredAtDate |
+                            date:'mediumDate' }}, {{
+                            voter?.registeredAtDate | date:'shortTime' }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Verification status</h6>
+                        <div class="h6 text-green mb-0">
+                            <span [ngClass]="{'verified':  voter?.isVerified, 'unverified':  !voter?.isVerified}"
+                                class="badge m-0">{{ voter?.isVerified ? 'Verified' : 'Not verified'}}
+                            </span>
+                            <!-- <span class="ms-2" *ngIf="!voter?.isVerified"><a class="small font-weight-bold">
+                                    Verify</a></span> -->
+                        </div>
+                    </li>
+                    <li *ngIf="voter?.isVerified" class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Verification by</h6>
+                        <h6 class="text-handy mb-1">{{ voter?.verifiedBy?.firstName | titlecase }} {{
+                            voter?.verifiedBy?.surName | titlecase }}</h6>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

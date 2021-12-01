@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css");
 // @import "./theme/fonts.scss";
 
-$handy-color: #9d3f3f;
+$handy-color: #596cd7;
 $handy-green: #12b886;
 
 html,
@@ -22,7 +22,7 @@ body {
     font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Nuni !important;
     // font-family: Gilroy;
     text-rendering: optimizeLegibility;
-    background-color: #fff9f9;
+    background-color: #eef1ff;
 }
 
 
@@ -76,7 +76,7 @@ a {
 
 
 .btn-handy:hover {
-    background-color: #ba3939 !important;
+    background-color: #34428c !important;
 }
 
 .btn-green {
@@ -121,7 +121,7 @@ a {
 
 .handy-card {
     border-radius: 10px !important;
-    border: 2px solid #e7cfcf !important;
+    border: 2px solid #d5dcff !important;
 }
 
 
@@ -215,7 +215,7 @@ a {
 }
 
 .handy-table-body {
-    font-weight: 600;
+    // font-weight: 600;
     font-size: 13.5px;
 }
 
@@ -253,13 +253,13 @@ a {
 
 @media only screen and (max-width: 420px) {
     .footer-clearfix {
-        padding-bottom: 80px !important;
+        padding-bottom: 70px !important;
     }
 }
 
 @media only screen and (min-width: 420px) {
     .footer-clearfix {
-        padding-bottom: 80px !important;
+        padding-bottom: 70px !important;
     }
 }
 

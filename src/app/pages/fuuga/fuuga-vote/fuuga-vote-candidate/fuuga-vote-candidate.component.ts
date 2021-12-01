@@ -9,6 +9,8 @@ import { UtilityService } from 'src/app/service/utility.service';
 })
 export class FuugaVoteCandidateComponent implements OnInit {
 
+  totalCandidates = 0;
+
   constructor(
     private utilityService: UtilityService
   ) { }

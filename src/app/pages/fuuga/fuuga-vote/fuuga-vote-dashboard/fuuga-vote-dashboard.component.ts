@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UtilityService } from 'src/app/service/utility.service';
+import { FuugaVoteService } from '../fuuga-vote.service';
 
 @Component({
   selector: 'app-fuuga-vote-dashboard',
@@ -11,23 +12,14 @@ export class FuugaVoteDashboardComponent implements OnInit {
 
   isLoading = false;
 
-  totalIncome = 0;
-  totalEngineers = 0;
-  totalBranches = 0;
-  totalCustomers = 0;
-  totalTransactions = 0;
-
-
-
-  totalJobsInProgress = 0;
-  totalJobsRepaired = 0;
-  totalJobsUnrepaired = 0;
-  totalJobsCollected = 0;
-  totalJobsReturned = 0;
-
+  totalVoters = 0;
+  totalVerifiedVoters = 0;
+  totalVotes = 0;
+  totalCandidates = 0;
   completionRatePercentage = 0;
 
   constructor(
+    private fuugaVoteService: FuugaVoteService,
     private utilityService: UtilityService
   ) { }
 

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FooterModule } from './components/footer/footer.module';
 
 import { HeaderModule } from './components/header/header.module';
 import { NotificationModule } from './components/notification/notification.module';
@@ -19,7 +20,8 @@ import { AuthInterceptor } from './pages/auth/auth.interceptor';
     HttpClientModule,
 
     NotificationModule,
-    HeaderModule
+    HeaderModule,
+    FooterModule
   ],
   providers: [
     AuthGuard,

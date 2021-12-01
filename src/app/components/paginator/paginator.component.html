@@ -1,0 +1,28 @@
+<div *ngIf="length > dataPerPage" class="card handy-card text-muted px-4 py-0">
+    <div class="d-flex justify-content-end align-items-center py-0">
+
+        <div class="d-flex p-2">
+            <p *ngIf="isDesktopView" class="mb-0 me-4">Items per page: {{dataPerPage}}</p>
+            <p class="mb-0">page {{current_page}} of {{pagesToGo}}</p>
+        </div>
+
+        <div [ngClass]="{disabled: current_page <= 1}" (click)="onPrev()"
+            class="action text-handy mb-0 ms-3 me-2 d-block ripple-effect py-2 px-3" data-toggle="tooltip"
+            title="Previous">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M16.2426 6.34317L14.8284 4.92896L7.75739 12L14.8285 19.0711L16.2427 17.6569L10.5858 12L16.2426 6.34317Z"
+                    fill="currentColor" />
+            </svg>
+        </div>
+
+        <div [ngClass]="{disabled: current_page === pagesToGo || currentDataLength < dataPerPage}" (click)="onNext()"
+            class="action text-handy mb-0 next d-block ripple-effect py-2 px-3" data-toggle="tooltip" title="Next">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.5858 6.34317L12 4.92896L19.0711 12L12 19.0711L10.5858 17.6569L16.2427 12L10.5858 6.34317Z"
+                    fill="currentColor" />
+            </svg>
+        </div>
+
+    </div>
+</div>

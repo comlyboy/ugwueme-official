@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { UtilityService } from 'src/app/service/utility.service';
+import { FuugaVoteService } from '../fuuga-vote.service';
+import { IVoter } from '../fuuga-voter/fuuga-voter.interface';
 
 @Component({
   selector: 'app-fuuga-votes',
@@ -8,14 +11,41 @@ import { UtilityService } from 'src/app/service/utility.service';
   styleUrls: ['./fuuga-votes.component.scss']
 })
 export class FuugaVotesComponent implements OnInit {
+  voters: IVoter[] = [];
+  totalVotes = 0;
+
+  recordSub: Subscription;
+
+  votersPerPage = 10;
+  currentPage = 1;
+
+  filterByVerified: number;
 
   constructor(
+    private fuugaVoteService: FuugaVoteService,
     private utilityService: UtilityService
   ) { }
 
 
-  ngOnInit(): void {
+
+
+
+  initContent() {
+    this.fuugaVoteService.getVoters(this.votersPerPage, this.currentPage);
+    this.recordSub = this.fuugaVoteService.getVotersUpdateListener()
+      .subscribe(data => {
+        this.voters = data.voters;
+        this.totalVotes = data.totalVoters;
+      });
+
     this.utilityService.setPageTitle('Votes • FUUGA')
+  }
+
+
+
+
+  ngOnInit(): void {
+    // this.initContent();
   }
 
 

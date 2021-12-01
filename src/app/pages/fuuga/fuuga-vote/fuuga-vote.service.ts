@@ -20,6 +20,11 @@ export class FuugaVoteService {
     totalVoters: number
   }>();
 
+  private candidatesUpdated = new Subject<{
+    candidates: IVoter[],
+    totalCandidates: number
+  }>();
+
 
   constructor(
     private http: HttpClient,
@@ -73,6 +78,34 @@ export class FuugaVoteService {
       });
   };
 
+
+
+
+
+
+
+
+
+  createCandidte() {
+
+  }
+
+  getCandidatesUpdateListener() {
+    return this.candidatesUpdated.asObservable();
+  }
+
+  getCanditates(candidatesPerPage: number, currentPage: number) {
+    const queryParameter = `?pagesize=${candidatesPerPage}&page=${currentPage}`;
+
+    this.http.get<{ data: { candidates: IVoter[], totalCandidates: number } }>(`${this.API_URL}candidate/get_all${queryParameter}`)
+      .subscribe(data => {
+        this.candidatesUpdated.next({
+          totalCandidates: data.data.totalCandidates,
+          candidates: [...data.data.candidates]
+        });
+        // this.notificationService.notify(`${data.message}`);
+      });
+  }
 
 
 }

@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { FuugaVoteCandidateComponent } from './fuuga-vote-candidate.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: FuugaVoteCandidateComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

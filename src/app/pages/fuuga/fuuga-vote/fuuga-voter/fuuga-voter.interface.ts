@@ -7,11 +7,15 @@ export interface VoterDto {
 }
 
 export interface IVoter {
+    _id: string;
     firstName: string;
     surName: string;
     kindred: string;
     schoolName: string;
     schoolLevel: string;
     votingSecret: string;
+    referenceId: string;
     isVerified: boolean;
+    verifiedBy: any;
+    registeredAtDate: string;
 }

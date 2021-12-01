@@ -1,9 +1,11 @@
 <app-notification></app-notification>
 
-<!-- app header system -->
 <ng-template [ngIf]='userIsAuthenticated'>
     <app-header> </app-header>
 </ng-template>
 
-
 <router-outlet></router-outlet>
+
+<ng-template [ngIf]='userIsAuthenticated'>
+    <app-footer></app-footer>
+</ng-template>

@@ -13,78 +13,73 @@
             <!-- <app-date-filter (filterData)='onFilter($event)'></app-date-filter> -->
         </div>
     </div>
-
 </div>
+
 
 <div class="container-fluid" *ngIf="!isLoading">
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-9 col-xl-12">
-            <div class="row">
 
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                    <div class="card handy-card border-0 text-muted my-2">
-                        <div class="card-body py-3">
-                            <div class="d-flex justify-content-between">
-                                <div class="display-4 m-0">
-                                    <i class="bi bi-people-fill"></i>
-                                </div>
-                                <div class="text-end">
-                                    <div class="h6 mb-3">Registerd voters</div>
-                                    <div class="h5 text-handy mb-0">{{ totalCustomers | number }}</div>
-                                </div>
-                            </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="card handy-card border-0 text-muted my-2">
+                <div class="card-body py-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="display-4 m-0">
+                            <i class="bi bi-person-lines-fill"></i>
+                        </div>
+                        <div class="text-end">
+                            <div class="h6 mb-3">Registered voters</div>
+                            <div class="h5 text-handy mb-0">{{ totalVoters | number }}</div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                    <div class="card handy-card border-0 text-muted my-2">
-                        <div class="card-body py-3">
-                            <div class="d-flex justify-content-between">
-                                <div class="display-4 m-0">
-                                    <i class="bi bi-people-fill"></i>
-                                </div>
-                                <div class="text-end">
-                                    <div class="h6 mb-3">Accredited voters</div>
-                                    <div class="h5 text-handy mb-0">{{ totalEngineers | number }}</div>
-                                </div>
-                            </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="card handy-card border-0 text-muted my-2">
+                <div class="card-body py-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="display-4 m-0">
+                            <i class="bi bi-person-check-fill"></i>
+                        </div>
+                        <div class="text-end">
+                            <div class="h6 mb-3">Accredited voters</div>
+                            <div class="h5 text-handy mb-0">{{ totalVerifiedVoters | number }}</div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                    <div class="card handy-card border-0 text-muted my-2">
-                        <div class="card-body py-3">
-                            <div class="d-flex justify-content-between">
-                                <div class="display-4 m-0">
-                                    <i class="bi bi-people-fill"></i>
-                                </div>
-                                <div class="text-end">
-                                    <div class="h6 mb-3">No of candidates</div>
-                                    <div class="h5 text-handy mb-0">{{ totalIncome }}</div>
-                                </div>
-                            </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="card handy-card border-0 text-muted my-2">
+                <div class="card-body py-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="display-4 m-0">
+                            <i class="bi bi-person-rolodex"></i>
+                        </div>
+                        <div class="text-end">
+                            <div class="h6 mb-3">No of candidates</div>
+                            <div class="h5 text-handy mb-0">{{ totalCandidates }}</div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                    <div class="card handy-card border-0 text-muted my-2">
-                        <div class="card-body py-3">
-                            <div class="d-flex justify-content-between">
-                                <div class="display-4 text-handy m-0">
-                                    <i class="bi bi-people-fill"></i>
-                                </div>
-                                <div class="text-end">
-                                    <div class="h6 mb-3">Votes cast</div>
-                                    <div class="h5 text-handy mb-0">{{ totalJobsInProgress | number }}</div>
-                                </div>
-                            </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="card handy-card border-0 text-muted my-2">
+                <div class="card-body py-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="display-4 m-0">
+                            <i class="bi bi-tags-fill"></i>
+                        </div>
+                        <div class="text-end">
+                            <div class="h6 mb-3">Votes cast</div>
+                            <div class="h5 text-handy mb-0">{{ totalVotes | number }}</div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -92,8 +87,7 @@
 </div>
 
 
-
-<div class="container-fluid pb-3">
+<div class="container-fluid pb-3 footer-clearfix">
     <div class="card handy-card border-0 text-muted my-2">
         <div class="card-header bg-transparent">
             <h6 class="mb-0 text-handy">Voting Chart</h6>

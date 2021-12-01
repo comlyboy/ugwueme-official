@@ -1,0 +1,24 @@
+.card {
+    letter-spacing: 1.5px
+}
+
+.next {
+    cursor: pointer;
+}
+
+.prev {
+    cursor: pointer;
+}
+
+p {
+    font-size: 13.5px;
+}
+
+.disabled {
+    color: rgb(186, 186, 186) !important;
+    cursor: default !important;
+}
+
+svg {
+    height: 20px;
+}
