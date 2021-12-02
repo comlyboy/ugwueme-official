@@ -83,7 +83,7 @@
 
             </div>
             <div class="modal-body px-0 pb-4">
-                <div class="text-center mb-3">
+                <div *ngIf="!voter?.isVerified" class="text-center mb-3">
                     <button (click)="onVerifyVoter(voter._id)" data-bs-dismiss="modal" class="btn btn-sm btn-handy px-3 border-radius">Verify
                         voter</button>
                 </div>
