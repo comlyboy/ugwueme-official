@@ -17,5 +17,6 @@ export interface IVoter {
     referenceId: string;
     isVerified: boolean;
     verifiedBy: any;
+    verifiedAtDate: string;
     registeredAtDate: string;
 }

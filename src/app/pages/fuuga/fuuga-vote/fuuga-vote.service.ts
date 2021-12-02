@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/app/components/notification/notification.service';
 import { NavigationService } from 'src/app/service/navigation.service';
 import { IVoter, VoterDto } from './fuuga-voter/fuuga-voter.interface';
+import { IDashMetrics } from './fuuga-vote-dashboard/fuuga-vote-dashboard.inteface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ import { IVoter, VoterDto } from './fuuga-voter/fuuga-voter.interface';
 export class FuugaVoteService {
   private API_URL = environment.API_URL;
 
+  private votersPerPage: number;
+  private currentPage: number;
+
+  private metricsUpdated = new Subject<IDashMetrics>();
 
   private votersUpdated = new Subject<{
     voters: IVoter[],
@@ -34,6 +39,21 @@ export class FuugaVoteService {
 
 
 
+
+  getMetricsUpdateListener() {
+    return this.metricsUpdated.asObservable();
+  }
+  getMetrics() {
+    this.http.get<{ data: IDashMetrics }>(`${this.API_URL}metrics`)
+      .subscribe(data => {
+        this.metricsUpdated.next(data.data);
+        // this.notificationService.notify(`${data.message}`);
+      });
+  }
+
+
+
+
   registerVoter(voterDto: VoterDto,) {
     this.http
       .post<{ message: string }>(`${this.API_URL}voter/register`, voterDto)
@@ -47,8 +67,10 @@ export class FuugaVoteService {
   getVotersUpdateListener() {
     return this.votersUpdated.asObservable();
   }
-
   getVoters(votersPerPage: number, currentPage: number) {
+    this.votersPerPage = votersPerPage;
+    this.currentPage = currentPage;
+
     const queryParameter = `?pagesize=${votersPerPage}&page=${currentPage}`;
 
     this.http
@@ -64,8 +86,12 @@ export class FuugaVoteService {
 
 
   verifyVoter(voterId: string) {
-    return this.http
-      .get<{ message: string }>(`${this.API_URL}voter/verify/${voterId}`);
+    this.http
+      .patch<{ message: string }>(`${this.API_URL}voter/verify/${voterId}`, { isVerified: true })
+      .subscribe(response => {
+        this.notificationService.notify(response.message);
+        this.getVoters(this.votersPerPage, this.currentPage);
+      });;
   }
 
 
@@ -73,8 +99,7 @@ export class FuugaVoteService {
     this.http.delete<{ message: string }>(`${this.API_URL}voter/deleteOne/${voterId}`)
       .subscribe(response => {
         this.notificationService.notify(response.message);
-        // this.navigationService.goToRepairRecordsPaage();
-        // this.getTransactions(12, 1);
+        this.getVoters(this.votersPerPage, this.currentPage);
       });
   };
 
@@ -90,10 +115,10 @@ export class FuugaVoteService {
 
   }
 
+
   getCandidatesUpdateListener() {
     return this.candidatesUpdated.asObservable();
   }
-
   getCanditates(candidatesPerPage: number, currentPage: number) {
     const queryParameter = `?pagesize=${candidatesPerPage}&page=${currentPage}`;
 
