@@ -20,7 +20,7 @@ export class FuugaVoterComponent implements OnInit {
 
   recordSub: Subscription;
 
-  votersPerPage = 10;
+  votersPerPage = 16;
   currentPage = 1;
 
   filterByVerified: number;
