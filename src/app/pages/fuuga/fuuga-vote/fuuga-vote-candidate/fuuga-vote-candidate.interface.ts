@@ -1,3 +1,4 @@
+import { IVoter } from "../fuuga-voter/fuuga-voter.interface";
 
 export interface RegisterCandidateDto {
     readonly position: ElectivePositionEnum;
@@ -8,7 +9,7 @@ export interface RegisterCandidateDto {
 export interface ICandidate {
     _id: string;
     position: ElectivePositionEnum;
-    voterId: string;
+    voterId: IVoter;
 }
 
 
@@ -30,11 +31,11 @@ export const ElectivePositionArray = [
     { name: 'President', value: ElectivePositionEnum.president },
     { name: 'Vice President', value: ElectivePositionEnum.vicePresident },
     { name: 'General Secretary', value: ElectivePositionEnum.generalSecretary },
-    { name: 'Ass General Secretary', value: ElectivePositionEnum.assGeneralSecretary },
+    { name: 'Assistant General Secretary', value: ElectivePositionEnum.assGeneralSecretary },
     { name: 'National Coordinator', value: ElectivePositionEnum.nationalCoordinator },
     { name: 'Financial Secretaty', value: ElectivePositionEnum.financialSecretary },
     { name: 'Treasurer', value: ElectivePositionEnum.treasurer },
-    { name: 'Accademic Coordinator', value: ElectivePositionEnum.academicCoordinator },
+    { name: 'Academic Coordinator', value: ElectivePositionEnum.academicCoordinator },
     { name: 'Director of Social', value: ElectivePositionEnum.directorOfSocials },
     { name: 'Public Relations Officer', value: ElectivePositionEnum.publicRelationOfficer },
     { name: 'Provost', value: ElectivePositionEnum.provost },

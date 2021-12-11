@@ -17,7 +17,7 @@ export class FuugaVoteService {
   private API_URL = environment.API_URL;
 
   private candidatesPerPage: number;
-  private filterByPosition: ElectivePositionEnum;
+  private filterByPosition?: ElectivePositionEnum;
 
   private votersPerPage?: number;
   private currentPage?: number;
@@ -122,6 +122,8 @@ export class FuugaVoteService {
       .post<{ message: string }>(`${this.API_URL}candidate/register`, candidateData)
       .subscribe(responseData => {
         this.notificationService.notify(`${responseData.message}`);
+
+        this.getCanditates(this.candidatesPerPage, this.currentPage, this.filterByPosition)
       });
   }
 
@@ -129,7 +131,7 @@ export class FuugaVoteService {
   getCandidatesUpdateListener() {
     return this.candidatesUpdated.asObservable();
   }
-  getCanditates(candidatesPerPage: number, currentPage: number, filterByPosition: ElectivePositionEnum) {
+  getCanditates(candidatesPerPage: number, currentPage?: number, filterByPosition?: ElectivePositionEnum) {
     this.candidatesPerPage = candidatesPerPage;
     this.currentPage = currentPage;
     this.filterByPosition = filterByPosition;
@@ -145,6 +147,22 @@ export class FuugaVoteService {
         // this.notificationService.notify(`${data.message}`);
       });
   }
+
+
+
+
+  deleteCandidate(candidateId: string) {
+    this.http.delete<{ message: string }>(`${this.API_URL}candidate/delete_one/${candidateId}`)
+      .subscribe(response => {
+        this.notificationService.notify(response.message);
+        this.getVoters(this.votersPerPage, this.currentPage);
+      });
+  };
+
+
+
+
+
 
 
 }

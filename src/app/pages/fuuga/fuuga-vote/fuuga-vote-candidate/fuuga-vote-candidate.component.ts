@@ -45,6 +45,18 @@ export class FuugaVoteCandidateComponent implements OnInit {
     this.fuugaVoteService.createCandidate(candidateData);
   }
 
+  onSelectCandidate(candidateId: string) {
+
+  }
+
+
+
+  onFilter(event: any) {
+    this.filterByPosition = event.target.value;
+
+    this.fuugaVoteService.getCanditates(this.candidatesPerPage, this.currentPage, this.filterByPosition);
+  }
+
 
   onChangePage(value: { newCurrentPage: number, newDataPerPage: number }) {
     this.currentPage = value.newCurrentPage;
@@ -58,11 +70,11 @@ export class FuugaVoteCandidateComponent implements OnInit {
   initContent() {
     this.fuugaVoteService.getCanditates(this.candidatesPerPage, this.currentPage, this.filterByPosition);
 
-    this.fuugaVoteService.getVoters();
+    this.fuugaVoteService.getVoters(1000, 1);
 
     this.recordSub = this.fuugaVoteService.getVotersUpdateListener()
       .subscribe(data => {
-        this.voters = data.voters.reverse();
+        this.voters = data.voters;
         // this.totalVoters = data.totalVoters;
       });
 

@@ -6,6 +6,7 @@ import { FuugaVoteCandidateRoutingModule } from './fuuga-vote-candidate-routing.
 import { FuugaVoteCandidateComponent } from './fuuga-vote-candidate.component';
 import { PaginatorModule } from 'src/app/components/paginator/paginator.module';
 import { AvatarModule } from 'src/app/components/avatar/avatar.module';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AvatarModule } from 'src/app/components/avatar/avatar.module';
     FuugaVoteCandidateRoutingModule,
     FormsModule,
     PaginatorModule,
-    AvatarModule
+    AvatarModule,
+    PipesModule
   ]
 })
 export class FuugaVoteCandidateModule { }
