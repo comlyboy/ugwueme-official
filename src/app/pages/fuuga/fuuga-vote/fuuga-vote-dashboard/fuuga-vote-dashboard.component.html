@@ -27,7 +27,7 @@
                             <i class="bi bi-person-lines-fill"></i>
                         </div>
                         <div class="text-end">
-                            <div class="h6 mb-3">Registered voters</div>
+                            <div class="h6 mb-3">Total Registered voters</div>
                             <div class="h5 text-handy mb-0">{{ totalVoters | number }}</div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                             <i class="bi bi-person-check-fill"></i>
                         </div>
                         <div class="text-end">
-                            <div class="h6 mb-3">Accredited voters</div>
+                            <div class="h6 mb-3">Total Accredited voters</div>
                             <div class="h5 text-handy mb-0">{{ totalVerifiedVoters | number }}</div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                             <i class="bi bi-person-rolodex"></i>
                         </div>
                         <div class="text-end">
-                            <div class="h6 mb-3">No of candidates</div>
+                            <div class="h6 mb-3">Total candidates</div>
                             <div class="h5 text-handy mb-0">{{ totalCandidates }}</div>
                         </div>
                     </div>
@@ -75,8 +75,24 @@
                             <i class="bi bi-tags-fill"></i>
                         </div>
                         <div class="text-end">
-                            <div class="h6 mb-3">Votes cast</div>
+                            <div class="h6 mb-3">Total votes cast</div>
                             <div class="h5 text-handy mb-0">{{ totalVotes | number }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="card handy-card border-0 text-muted my-2">
+                <div class="card-body py-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="display-4 m-0">
+                            <i class="bi bi-tags-fill"></i>
+                        </div>
+                        <div class="text-end">
+                            <div class="h6 mb-3">Total votes to be cast</div>
+                            <div class="h5 text-handy mb-0">{{ totalEstimatedVotes | number }}</div>
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ export class FuugaVoteDashboardComponent implements OnInit, OnDestroy {
   totalVerifiedVoters = 0;
   totalVotes = 0;
   totalCandidates = 0;
-  completionRatePercentage = 0;
+  totalEstimatedVotes = 0;
   metricsSub: Subscription;
 
   constructor(
@@ -38,6 +38,7 @@ export class FuugaVoteDashboardComponent implements OnInit, OnDestroy {
         this.totalVotes = data.totalVotes;
         this.totalVerifiedVoters = data.totalVerifiedVoters;
         this.totalCandidates = data.totalCandidates;
+        this.totalEstimatedVotes=data.totalEstimatedVotes;
       });
 
     this.utilityService.setPageTitle('FUUGA voting dashboard')

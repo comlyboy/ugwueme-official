@@ -3,4 +3,5 @@ export interface IDashMetrics {
     totalVerifiedVoters: number;
     totalCandidates: number;
     totalVotes: number;
+    totalEstimatedVotes: number;
 }
