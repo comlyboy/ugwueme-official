@@ -12,7 +12,6 @@ import { IVoter } from './fuuga-voter.interface';
   styleUrls: ['./fuuga-voter.component.scss']
 })
 export class FuugaVoterComponent implements OnInit {
-  isDesktopView = false;
 
   voter: IVoter;
   voters: IVoter[] = [];
@@ -29,10 +28,7 @@ export class FuugaVoterComponent implements OnInit {
     private fuugaVoteService: FuugaVoteService,
     private utilityService: UtilityService,
     private dialogService: DialogService
-  ) {
-    this.isDesktopView = utilityService.getIsDesktopDevice();
-
-  }
+  ) { }
 
 
   onSelectVoter(voterId: string) {
@@ -42,6 +38,10 @@ export class FuugaVoterComponent implements OnInit {
 
   onVerifyVoter(voterId: string) {
     this.dialogService.verifyVoterDialog(voterId);
+  }
+
+  onDeleteVoter(voterId: string) {
+    this.dialogService.deleteVoterDialog(voterId);
   }
 
 

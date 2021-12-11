@@ -1,13 +1,87 @@
-<div class="container-fluid">
+<div class="container-fluid mb-3">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb ps-3 py-4 mb-0">
-            <!-- <a class="breadcrumb-item text-handy h5 mb-0" routerLink="/fuuga" aria-current="page">Fuuga
-            </a>
-            <a class="breadcrumb-item text-handy h5 mb-0" routerLink="/fuuga/election/dashboard" aria-current="page">Election
-            </a> -->
             <li class="breadcrumb-item active h5 mb-0" aria-current="page">Candidates
                 <span class="ms-2 badge bg-handy">{{ totalCandidates | number}}</span>
             </li>
         </ol>
     </nav>
+</div>
+
+
+<div class="container mb-4">
+    <div class="row pt-4">
+        <div class="col-sm-12 col-md-7 col-lg-8 col-xl-8">
+            <select class="form-select mb-2" aria-label=".form-select-sm example">
+                <option selected value="">Filter candidates by position</option>
+                <option *ngFor="let voter of voters" [value]="voter._id">{{ voter.firstName | titlecase }}
+                    {{ voter.surName | titlecase }}</option>
+            </select>
+        </div>
+
+        <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4">
+            <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                class="btn btn-handy border-radius px-4 w-100 mb-2">Add candidate</button>
+        </div>
+    </div>
+</div>
+
+
+<ng-template [ngIf]="candidates.length <= 0">
+    <p class="text-center">No candidate(s) to show...</p>
+</ng-template>
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-radius">
+            <div class="modal-header">
+                <h5 class="modal-title text-handy">Add Candidate</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <form (submit)="onSubmitCandidate(candidateForm)" #candidateForm="ngForm">
+                <div class="modal-body py-4">
+
+                    <select
+                        [ngClass]="{'is-invalid animate__animated animate__headShake': voter.touched && voter.invalid}"
+                        class="form-select form-select-lg" name="inputVoter" ngModel #voter="ngModel" required>
+                        <option selected value="">Select Candidate</option>
+                        <option *ngFor="let voter of voters" [value]="voter._id">{{ voter.firstName | titlecase }}
+                            {{ voter.surName | titlecase }} => From {{ voter.kindred }} kindred</option>
+                    </select>
+                    <div class="mb-1 text-center" *ngIf="voter.touched && voter.invalid">
+                        <small *ngIf="voter.errors?.required" class="text-danger">This field is required.</small>
+                    </div>
+
+
+                    <select
+                        [ngClass]="{'is-invalid animate__animated animate__headShake': position.touched && position.invalid}"
+                        class="form-select form-select-lg mt-3" name="inputPosition" ngModel #position="ngModel"
+                        required>
+                        <option selected value="">Select aspiring office</option>
+                        <option *ngFor="let positionn of positions" [value]="positionn.value">{{ positionn.name }}</option>
+                    </select>
+                    <div class="mb-1 text-center" *ngIf="position.touched && position.invalid">
+                        <small *ngIf="position.errors?.required" class="text-danger">This field is required.</small>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="candidateForm.invalid" type="submit"
+                        class="btn btn-handy w-100 text-uppercase border-radius" data-bs-dismiss="modal"
+                        aria-label="Close">Submit</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
 </div>

@@ -1,13 +1,16 @@
-export interface VoterDto {
-    position: ElectivePositionEnum;
-    voterId: string; // from voter table
+
+export interface RegisterCandidateDto {
+    readonly position: ElectivePositionEnum;
+    readonly voterId: string;
 }
+
 
 export interface ICandidate {
     _id: string;
     position: ElectivePositionEnum;
-    voterId: string; // from voter table
+    voterId: string;
 }
+
 
 export enum ElectivePositionEnum {
     president = 1,
@@ -23,3 +26,16 @@ export enum ElectivePositionEnum {
     provost = 11
 }
 
+export const ElectivePositionArray = [
+    { name: 'President', value: ElectivePositionEnum.president },
+    { name: 'Vice President', value: ElectivePositionEnum.vicePresident },
+    { name: 'General Secretary', value: ElectivePositionEnum.generalSecretary },
+    { name: 'Ass General Secretary', value: ElectivePositionEnum.assGeneralSecretary },
+    { name: 'National Coordinator', value: ElectivePositionEnum.nationalCoordinator },
+    { name: 'Financial Secretaty', value: ElectivePositionEnum.financialSecretary },
+    { name: 'Treasurer', value: ElectivePositionEnum.treasurer },
+    { name: 'Accademic Coordinator', value: ElectivePositionEnum.academicCoordinator },
+    { name: 'Director of Social', value: ElectivePositionEnum.directorOfSocials },
+    { name: 'Public Relations Officer', value: ElectivePositionEnum.publicRelationOfficer },
+    { name: 'Provost', value: ElectivePositionEnum.provost },
+];

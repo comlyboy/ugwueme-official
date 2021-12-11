@@ -26,14 +26,14 @@ export class DialogService {
   }
 
 
-  // async deleteCustomerDialog(customerId: string) {
-  //   try {
-  //     const result = await this.OpenDialog('Delete customer?');
-  //     if (result.value) {
-  //       this.repairCustomerService.deleteCustomer(customerId);
-  //     }
-  //   } catch (error) { }
-  // }
+  async deleteVoterDialog(voterId: string) {
+    try {
+      const result = await this.OpenDialog('You sure you want to delete this voter?');
+      if (result.value) {
+        this.fuugaVoteService.deleteVoter(voterId);
+      }
+    } catch (error) { }
+  }
 
 
   // async deleteRepairRecordDialog(transactionId: string) {

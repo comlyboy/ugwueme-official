@@ -8,6 +8,7 @@ import { NotificationService } from 'src/app/components/notification/notificatio
 import { NavigationService } from 'src/app/service/navigation.service';
 import { IVoter, VoterDto } from './fuuga-voter/fuuga-voter.interface';
 import { IDashMetrics } from './fuuga-vote-dashboard/fuuga-vote-dashboard.inteface';
+import { ElectivePositionEnum, ICandidate, RegisterCandidateDto } from './fuuga-vote-candidate/fuuga-vote-candidate.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,11 @@ import { IDashMetrics } from './fuuga-vote-dashboard/fuuga-vote-dashboard.intefa
 export class FuugaVoteService {
   private API_URL = environment.API_URL;
 
-  private votersPerPage: number;
-  private currentPage: number;
+  private candidatesPerPage: number;
+  private filterByPosition: ElectivePositionEnum;
+
+  private votersPerPage?: number;
+  private currentPage?: number;
 
   private metricsUpdated = new Subject<IDashMetrics>();
 
@@ -26,7 +30,7 @@ export class FuugaVoteService {
   }>();
 
   private candidatesUpdated = new Subject<{
-    candidates: IVoter[],
+    candidates: ICandidate[],
     totalCandidates: number
   }>();
 
@@ -67,7 +71,7 @@ export class FuugaVoteService {
   getVotersUpdateListener() {
     return this.votersUpdated.asObservable();
   }
-  getVoters(votersPerPage: number, currentPage: number) {
+  getVoters(votersPerPage?: number, currentPage?: number) {
     this.votersPerPage = votersPerPage;
     this.currentPage = currentPage;
 
@@ -85,6 +89,7 @@ export class FuugaVoteService {
   }
 
 
+
   verifyVoter(voterId: string) {
     this.http
       .patch<{ message: string }>(`${this.API_URL}voter/verify/${voterId}`, { isVerified: true })
@@ -95,8 +100,9 @@ export class FuugaVoteService {
   }
 
 
+
   deleteVoter(voterId: string) {
-    this.http.delete<{ message: string }>(`${this.API_URL}voter/deleteOne/${voterId}`)
+    this.http.delete<{ message: string }>(`${this.API_URL}voter/delete_one/${voterId}`)
       .subscribe(response => {
         this.notificationService.notify(response.message);
         this.getVoters(this.votersPerPage, this.currentPage);
@@ -111,18 +117,26 @@ export class FuugaVoteService {
 
 
 
-  createCandidte() {
-
+  createCandidate(candidateData: RegisterCandidateDto) {
+    this.http
+      .post<{ message: string }>(`${this.API_URL}candidate/register`, candidateData)
+      .subscribe(responseData => {
+        this.notificationService.notify(`${responseData.message}`);
+      });
   }
 
 
   getCandidatesUpdateListener() {
     return this.candidatesUpdated.asObservable();
   }
-  getCanditates(candidatesPerPage: number, currentPage: number) {
-    const queryParameter = `?pagesize=${candidatesPerPage}&page=${currentPage}`;
+  getCanditates(candidatesPerPage: number, currentPage: number, filterByPosition: ElectivePositionEnum) {
+    this.candidatesPerPage = candidatesPerPage;
+    this.currentPage = currentPage;
+    this.filterByPosition = filterByPosition;
 
-    this.http.get<{ data: { candidates: IVoter[], totalCandidates: number } }>(`${this.API_URL}candidate/get_all${queryParameter}`)
+    const queryParameter = `?pagesize=${candidatesPerPage}&page=${currentPage}&filter_by_position=${filterByPosition}`;
+
+    this.http.get<{ data: { candidates: ICandidate[], totalCandidates: number } }>(`${this.API_URL}candidate/get_all${queryParameter}`)
       .subscribe(data => {
         this.candidatesUpdated.next({
           totalCandidates: data.data.totalCandidates,
