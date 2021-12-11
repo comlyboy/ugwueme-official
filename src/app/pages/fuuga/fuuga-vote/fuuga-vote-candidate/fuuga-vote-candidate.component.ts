@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { DialogService } from 'src/app/service/dialog.service';
@@ -13,7 +13,7 @@ import { ElectivePositionArray, ElectivePositionEnum, ICandidate, RegisterCandid
   templateUrl: './fuuga-vote-candidate.component.html',
   styleUrls: ['./fuuga-vote-candidate.component.scss']
 })
-export class FuugaVoteCandidateComponent implements OnInit {
+export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
   candidates: ICandidate[] = [];
   totalCandidates = 0;
   voters: IVoter[] = [];
@@ -22,7 +22,7 @@ export class FuugaVoteCandidateComponent implements OnInit {
   currentPage = 1;
   filterByPosition: ElectivePositionEnum
 
-  consdidateSub: Subscription;
+  candidateSub: Subscription;
   recordSub: Subscription;
 
   positions = ElectivePositionArray;
@@ -74,14 +74,13 @@ export class FuugaVoteCandidateComponent implements OnInit {
 
     this.recordSub = this.fuugaVoteService.getVotersUpdateListener()
       .subscribe(data => {
-        this.voters = data.voters;
-        // this.totalVoters = data.totalVoters;
+        const voters = data.voters;
+        this.voters = voters.filter(item => item.isVerified);
       });
 
 
-    this.consdidateSub = this.fuugaVoteService.getCandidatesUpdateListener()
+    this.candidateSub = this.fuugaVoteService.getCandidatesUpdateListener()
       .subscribe(data => {
-        console.log(data)
         this.candidates = data.candidates;
         this.totalCandidates = data.totalCandidates;
       });
@@ -95,6 +94,11 @@ export class FuugaVoteCandidateComponent implements OnInit {
   }
 
 
+
+  ngOnDestroy() {
+    this.candidateSub.unsubscribe();
+    this.recordSub.unsubscribe();
+  }
 
 
 }

@@ -106,7 +106,7 @@
                         class="form-select form-select-lg" name="inputVoter" ngModel #voter="ngModel" required>
                         <option selected value="">Select Candidate</option>
                         <option *ngFor="let voter of voters" [value]="voter._id">{{ voter.firstName | titlecase }}
-                            {{ voter.surName | titlecase }} => From {{ voter.kindred }} kindred</option>
+                            {{ voter.surName | titlecase }} => of {{ voter.kindred }} kindred</option>
                     </select>
                     <div class="mb-1 text-center" *ngIf="voter.touched && voter.invalid">
                         <small *ngIf="voter.errors?.required" class="text-danger">This field is required.</small>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DialogService } from 'src/app/service/dialog.service';
 
@@ -11,7 +11,7 @@ import { IVoter } from './fuuga-voter.interface';
   templateUrl: './fuuga-voter.component.html',
   styleUrls: ['./fuuga-voter.component.scss']
 })
-export class FuugaVoterComponent implements OnInit {
+export class FuugaVoterComponent implements OnInit, OnDestroy {
 
   voter: IVoter;
   voters: IVoter[] = [];
@@ -70,6 +70,11 @@ export class FuugaVoterComponent implements OnInit {
 
   ngOnInit(): void {
     this.initContent();
+  }
+
+  
+  ngOnDestroy() {
+    this.recordSub.unsubscribe();
   }
 
 
