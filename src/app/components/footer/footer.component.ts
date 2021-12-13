@@ -14,7 +14,7 @@ export class FooterComponent implements OnChanges {
     { title: 'Voters', link: 'fuuga/election/voters', icon: 'people-fill' },
     { title: 'Candidates', link: 'fuuga/election/candidates', icon: 'person-rolodex' },
     { title: 'Votes', link: 'fuuga/election/votes', icon: 'tags-fill' },
-    // { title: 'Profile', link: 'fuuga/election/votes', icon: 'person-circle' },
+    { title: 'Settings', link: 'fuuga/election/settings', icon: 'gear-fill' },
   ];
 
 

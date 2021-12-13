@@ -27,6 +27,8 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
 
   positions = ElectivePositionArray;
 
+  selectedImage: string;
+
   constructor(
     private fuugaVoteService: FuugaVoteService,
     private utilityService: UtilityService,
@@ -37,10 +39,12 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
   onSubmitCandidate(form: NgForm) {
     if (form.invalid) return;
 
-    const candidateData = {
+    const candidateData: RegisterCandidateDto = {
+      image: form.value.inputImage,
       position: form.value.inputPosition,
+      manifesto: form.value.inputManifesto,
       voterId: form.value.inputVoter
-    } as RegisterCandidateDto;
+    };
 
     this.fuugaVoteService.createCandidate(candidateData);
   }

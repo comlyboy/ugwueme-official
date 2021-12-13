@@ -38,7 +38,7 @@ export class PositionPipe implements PipeTransform {
         return 'Academic Coordinator';
 
       case ElectivePositionEnum.directorOfSocials:
-        return 'Director of Social';
+        return 'Director of Social and Sport';
 
       case ElectivePositionEnum.publicRelationOfficer:
         return 'Public Relations Officer';

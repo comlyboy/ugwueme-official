@@ -96,8 +96,8 @@
             <div class="modal-header">
                 <h5 class="modal-title text-handy">Add Candidate</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
             </div>
+            <img *ngIf="selectedImage" [src]="selectedImage" class="card-img-top" alt="candidate_IMG">
             <form (submit)="onSubmitCandidate(candidateForm)" #candidateForm="ngForm">
                 <div class="modal-body py-4">
 
@@ -113,7 +113,7 @@
                     </div>
 
 
-                    <select
+                    <select [disabled]="voter.invalid!"
                         [ngClass]="{'is-invalid animate__animated animate__headShake': position.touched && position.invalid}"
                         class="form-select form-select-lg mt-3" name="inputPosition" ngModel #position="ngModel"
                         required>
@@ -124,6 +124,30 @@
                     <div class="mb-1 text-center" *ngIf="position.touched && position.invalid">
                         <small *ngIf="position.errors?.required" class="text-danger">This field is required.</small>
                     </div>
+
+
+                    <div class="input-group mt-3">
+                        <input [disabled]="voter.invalid! || position.invalid!"
+                            [ngClass]="{'is-invalid animate__animated animate__headShake': img.touched && img.invalid}"
+                            type="file" accept="image/*" class="form-control" id="inputGroupFile02" name="inputImage"
+                            ngModel #img="ngModel" required>
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                    </div>
+                    <div class="mb-1 text-center" *ngIf="img.touched && img.invalid">
+                        <small *ngIf="img.errors?.required" class="text-danger">Image is required.</small>
+                    </div>
+
+
+                    <div class="form-floating mt-3">
+                        <textarea [disabled]="voter.invalid! || position.invalid!" class="form-control"
+                            placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"
+                            name="inputManifesto" ngModel #position="ngModel" required></textarea>
+                        <label for="floatingTextarea2">Candidate manifesto</label>
+                    </div>
+                    <div class="mb-1 text-center" *ngIf="position.touched && position.invalid">
+                        <small *ngIf="position.errors?.required" class="text-danger">This field is required.</small>
+                    </div>
+
 
                 </div>
                 <div class="modal-footer">

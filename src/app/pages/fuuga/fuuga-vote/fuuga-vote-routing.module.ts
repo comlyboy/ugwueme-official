@@ -60,6 +60,12 @@ const routes: Routes = [
     loadChildren: () => import('./fuuga-vote-candidate/fuuga-vote-candidate.module')
       .then(m => m.FuugaVoteCandidateModule)
   },
+  {
+    path: 'settings',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./fuuga-vote-setting/fuuga-vote-setting.module')
+      .then(m => m.FuugaVoteSettingModule)
+  },
 
 ];
 

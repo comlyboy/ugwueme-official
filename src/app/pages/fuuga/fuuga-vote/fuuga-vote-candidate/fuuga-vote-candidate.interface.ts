@@ -1,7 +1,9 @@
 import { IVoter } from "../fuuga-voter/fuuga-voter.interface";
 
 export interface RegisterCandidateDto {
+    readonly image: string;
     readonly position: ElectivePositionEnum;
+    readonly manifesto: string;
     readonly voterId: string;
 }
 
