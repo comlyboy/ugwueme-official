@@ -40,7 +40,7 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
     if (form.invalid) return;
 
     const candidateData: RegisterCandidateDto = {
-      image: form.value.inputImage,
+      image: this.selectedImage,
       position: form.value.inputPosition,
       manifesto: form.value.inputManifesto,
       voterId: form.value.inputVoter
@@ -53,6 +53,38 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
 
   }
 
+
+  onSelectIMG(event: Event) {
+    const pickedFile = (event.target as any).files[0] as File;
+    if (!pickedFile) {
+      return;
+    }
+
+    const fr = new FileReader();
+    fr.onload = () => {
+      const dataUrl = fr.result!.toString();
+      this.selectedImage = dataUrl;
+
+      let img = new Image();
+
+
+      // img.onload = function() {
+      //   let canvas = document.createElement('canvas');
+      //   let ctx = canvas.getContext('2d');
+      //   canvas.width = 250;
+      //   canvas.height = canvas.width * (img.height / img.width);
+      //   ctx!.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      //   // SEND THIS DATA TO WHEREVER YOU NEED IT
+      //   let data = canvas.toDataURL('image/png');
+
+       
+      // }
+
+    };
+    fr.readAsDataURL(pickedFile);
+
+  }
 
 
   onFilter(event: any) {
