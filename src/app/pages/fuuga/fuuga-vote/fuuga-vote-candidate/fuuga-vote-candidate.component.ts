@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { DialogService } from 'src/app/service/dialog.service';
 
+import { DialogService } from 'src/app/service/dialog.service';
 import { UtilityService } from 'src/app/service/utility.service';
 import { FuugaVoteService } from '../fuuga-vote.service';
 import { IVoter } from '../fuuga-voter/fuuga-voter.interface';
@@ -28,6 +28,7 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
   positions = ElectivePositionArray;
 
   selectedImage: string;
+  pickedFile: File;
 
   constructor(
     private fuugaVoteService: FuugaVoteService,
@@ -40,13 +41,15 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
     if (form.invalid) return;
 
     const candidateData: RegisterCandidateDto = {
-      image: this.selectedImage,
+      image: this.pickedFile,
       position: form.value.inputPosition,
       manifesto: form.value.inputManifesto,
       voterId: form.value.inputVoter
     };
 
     this.fuugaVoteService.createCandidate(candidateData);
+
+    form.resetForm();
   }
 
   onSelectCandidate(candidateId: string) {
@@ -56,6 +59,8 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
 
   onSelectIMG(event: Event) {
     const pickedFile = (event.target as any).files[0] as File;
+    this.pickedFile = pickedFile;
+
     if (!pickedFile) {
       return;
     }
@@ -78,7 +83,7 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
       //   // SEND THIS DATA TO WHEREVER YOU NEED IT
       //   let data = canvas.toDataURL('image/png');
 
-       
+
       // }
 
     };

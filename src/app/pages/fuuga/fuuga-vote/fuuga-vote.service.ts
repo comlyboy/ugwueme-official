@@ -118,8 +118,15 @@ export class FuugaVoteService {
 
 
   createCandidate(candidateData: RegisterCandidateDto) {
+
+    const newCandidate = new FormData()
+    newCandidate.append('image', candidateData.image);
+    newCandidate.append('position', candidateData.position);
+    newCandidate.append('manifesto', candidateData.manifesto);
+    newCandidate.append('voterId', candidateData.voterId);
+
     this.http
-      .post<{ message: string }>(`${this.API_URL}candidate/register`, candidateData)
+      .post<{ message: string }>(`${this.API_URL}candidate/register`, newCandidate)
       .subscribe(responseData => {
         this.notificationService.notify(`${responseData.message}`);
 
