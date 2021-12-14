@@ -99,7 +99,6 @@
                 <h5 class="modal-title text-handy">Add Candidate</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <img *ngIf="selectedImage" [src]="selectedImage" class="card-img-top" alt="candidate_IMG">
             <form (submit)="onSubmitCandidate(candidateForm)" #candidateForm="ngForm">
                 <div class="modal-body py-4">
 
@@ -152,6 +151,10 @@
 
 
                 </div>
+                <div class="text-center mb-4">
+                    <img *ngIf="selectedImage" [src]="selectedImage" class="card-img-top" alt="candidate_IMG">
+                </div>
+
                 <div class="modal-footer">
                     <button [disabled]="candidateForm.invalid" type="submit"
                         class="btn btn-handy w-100 text-uppercase border-radius" data-bs-dismiss="modal"

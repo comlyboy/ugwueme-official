@@ -27,7 +27,7 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
 
   positions = ElectivePositionArray;
 
-  selectedImage: string;
+  selectedImage: string | undefined;
   pickedFile: File;
 
   constructor(
@@ -50,6 +50,7 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
     this.fuugaVoteService.createCandidate(candidateData);
 
     form.resetForm();
+    this.selectedImage = undefined;
   }
 
   onSelectCandidate(candidateId: string) {
