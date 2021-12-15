@@ -9,6 +9,7 @@ import { NavigationService } from 'src/app/service/navigation.service';
 import { IVoter, VoterDto } from './fuuga-voter/fuuga-voter.interface';
 import { IDashMetrics } from './fuuga-vote-dashboard/fuuga-vote-dashboard.inteface';
 import { ElectivePositionEnum, ICandidate, RegisterCandidateDto } from './fuuga-vote-candidate/fuuga-vote-candidate.interface';
+import { ISetting, SettingDto } from './fuuga-vote-setting/fuuga-vote-setting.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -169,6 +170,19 @@ export class FuugaVoteService {
 
 
 
+
+
+  getSettings() {
+    return this.http.get<{ data: { setting: ISetting } }>(`${this.API_URL}setting/get`);
+  }
+
+  updateSettings(settingId: string, payload: SettingDto) {
+    this.http
+      .patch<{ message: string }>(`${this.API_URL}setting/update/${settingId}`, payload)
+      .subscribe(response => {
+        this.notificationService.notify(response.message);
+      });
+  }
 
 
 

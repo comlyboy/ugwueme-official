@@ -69,6 +69,16 @@ a {
     box-shadow: none !important;
 }
 
+.form-check-input,
+.form-check-input:hover,
+.form-check-input:active,
+.form-check-input:active:focus,
+.form-check-input:visited,
+.form-check-input:focus {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
 .btn-handy {
     background-color: $handy-color !important;
     color: lighten($color: $handy-color, $amount: 35%) !important;

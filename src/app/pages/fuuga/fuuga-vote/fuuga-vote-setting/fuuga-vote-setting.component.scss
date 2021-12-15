@@ -1,3 +1,10 @@
-.container{
+$handy-color: #596cd7;
+
+.container {
     max-width: 800px;
+}
+
+.form-check-input:checked {
+    background-color: $handy-color;
+    border-color: $handy-color;
 }

@@ -32,6 +32,7 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
   selectedImage: string | undefined;
   pickedFile: File;
 
+  
   constructor(
     private fuugaVoteService: FuugaVoteService,
     private utilityService: UtilityService,
