@@ -9,7 +9,7 @@
 </div>
 
 
-<div class="container mb-3">
+<div class="container contain mb-3">
     <div class="row">
         <div class="col-sm-12 col-md-7 col-lg-8 col-xl-8">
             <select (change)="onFilter($event)" class="form-select mb-2" aria-label=".form-select-sm example">
@@ -26,32 +26,18 @@
 </div>
 
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
+
         <div *ngFor="let candidate of candidates" class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
             <div class="card handy-card mb-2">
-                <img [src]="candidate.image" class="card-img-top" alt="candidate_IMG">
+                <img [src]="candidate.image" class="card-img-top candidate-img" alt="candidate_IMG">
 
                 <div class="card-body px-3">
-                    <div class="d-flex justify-content-between">
-                        <h5 (click)="onSelectCandidate(candidate.voterId._id)" class="text-handy pointer text-truncate">
-                            {{ candidate.position | positionFormat }} </h5>
-                        <div class="text-end">
-                            <!-- <div class="btn-group dropstart">
-                                <h6 data-bs-toggle="dropdown" data-display="static" aria-haspopup="true"
-                                    aria-expanded="false" class="text-muted pointer"> <i
-                                        class="bi bi-three-dots-vertical"></i>
-                                </h6>
-                                <ul class="dropdown-menu handy-card" aria-labelledby="dropdownMenuButton1">
-                                    <li> <button class="dropdown-item py-2"
-                                            type="button">Verify voter</button></li>
-                                </ul>
-                            </div> -->
-                        </div>
-                    </div>
+                    <h5 class="card-title text-handy">{{ candidate.position | positionFormat }}</h5>
 
                     <div class="d-flex justify-content-between mb-1">
-                        <h6 class="mb-0 text-muted text-truncate"> {{
+                        <h6 class="mb-0 text-truncate"> {{
                             candidate.voterId.firstName |
                             titlecase }} {{ candidate.voterId.surName | titlecase }} </h6>
                         <small class="mb-1 text-muted text-truncate">{{ candidate.voterId.kindred| titlecase }} </small>
@@ -62,6 +48,13 @@
                             candidate.voterId.schoolLevel | titlecase }}</small>
                     </div>
 
+
+
+                </div>
+                <div class="card-body pt-0">
+                    <h6 data-bs-toggle="modal" data-bs-target="#candidateModal"
+                        (click)="onSelectCandidate(candidate._id)" class="text-handy pointer mb-0">See
+                        details</h6>
                 </div>
             </div>
         </div>
@@ -91,9 +84,8 @@
 
 
 
-
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down" role="document">
         <div class="modal-content border-radius">
             <div class="modal-header">
                 <h5 class="modal-title text-handy">Add Candidate</h5>
@@ -152,7 +144,7 @@
 
                 </div>
                 <div class="text-center mb-4">
-                    <img *ngIf="selectedImage" [src]="selectedImage" class="card-img-top" alt="candidate_IMG">
+                    <img *ngIf="selectedImage" [src]="selectedImage" class="ccard-img-top" alt="candidate_IMG">
                 </div>
 
                 <div class="modal-footer">
@@ -162,6 +154,61 @@
                 </div>
             </form>
 
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div class="modal fade" id="candidateModal" tabindex="-1" aria-labelledby="candidateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-radius">
+            <div class="modal-header">
+                <h5 class="modal-title text-handy"> </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <img [src]="candidate?.image" class="card-img-top candidate-img" alt="candidate_IMG">
+
+            <div class="modal-body px-0 pb-4">
+                <div class="d-flex justify-content-center mb-3">
+
+                </div>
+                <h5 class="mb-0 text-center text-handy">{{ candidate?.voterId?.firstName | titlecase }} {{
+                    candidate?.voterId?.surName | titlecase
+                    }}</h5>
+
+                <hr class="mt-0">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Full name</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.voterId?.firstName | titlecase }} {{
+                            candidate?.voterId?.surName | titlecase }}
+                        </h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Kindred</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.voterId?.kindred | titlecase }} </h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">School</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.voterId?.schoolName | titlecase }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Level in school</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.voterId?.schoolLevel | titlecase }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Registered at</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.registeredAtDate |
+                            date:'mediumDate' }}, {{
+                            candidate?.registeredAtDate | date:'mediumTime' }}</h6>
+                    </li>
+
+                </ul>
+            </div>
         </div>
     </div>
 

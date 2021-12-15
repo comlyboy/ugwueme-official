@@ -1,3 +1,4 @@
+import { IUser } from "src/app/pages/auth/user.interface";
 import { IVoter } from "../fuuga-voter/fuuga-voter.interface";
 
 export interface RegisterCandidateDto {
@@ -12,8 +13,11 @@ export interface ICandidate {
     _id: string;
     image: string;
     position: ElectivePositionEnum;
-    manifesto: string;
     voterId: IVoter;
+    manifesto: string;
+    referenceId: string;
+    addedBy: IUser;
+    registeredAtDate: string;
 }
 
 

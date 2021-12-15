@@ -14,8 +14,10 @@ import { ElectivePositionArray, ElectivePositionEnum, ICandidate, RegisterCandid
   styleUrls: ['./fuuga-vote-candidate.component.scss']
 })
 export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
+  candidate: ICandidate;
   candidates: ICandidate[] = [];
   totalCandidates = 0;
+
   voters: IVoter[] = [];
 
   candidatesPerPage = 16;
@@ -54,7 +56,8 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
   }
 
   onSelectCandidate(candidateId: string) {
-
+    const candidate = this.candidates.find(item => item._id === candidateId);
+    this.candidate = candidate!;
   }
 
 
