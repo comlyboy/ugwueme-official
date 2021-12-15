@@ -1,3 +1,5 @@
+import { IUser } from "src/app/pages/auth/user.interface";
+
 export interface VoterDto {
     readonly firstName: string;
     readonly surName: string;
@@ -16,7 +18,7 @@ export interface IVoter {
     votingSecret: string;
     referenceId: string;
     isVerified: boolean;
-    verifiedBy: any;
+    verifiedBy: IUser;
     verifiedAtDate: string;
     registeredAtDate: string;
 }

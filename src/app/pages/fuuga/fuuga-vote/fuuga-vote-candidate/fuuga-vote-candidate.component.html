@@ -85,7 +85,7 @@
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content border-radius">
             <div class="modal-header">
                 <h5 class="modal-title text-handy">Add Candidate</h5>
@@ -173,14 +173,7 @@
             <img [src]="candidate?.image" class="card-img-top candidate-img" alt="candidate_IMG">
 
             <div class="modal-body px-0 pb-4">
-                <div class="d-flex justify-content-center mb-3">
 
-                </div>
-                <h5 class="mb-0 text-center text-handy">{{ candidate?.voterId?.firstName | titlecase }} {{
-                    candidate?.voterId?.surName | titlecase
-                    }}</h5>
-
-                <hr class="mt-0">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex justify-content-between">
                         <h6 class="text-muted mb-1">Full name</h6>
@@ -201,10 +194,18 @@
                         <h6 class="text-handy mb-1">{{ candidate?.voterId?.schoolLevel | titlecase }}</h6>
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Intending post</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.position | positionFormat }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
                         <h6 class="text-muted mb-1">Registered at</h6>
                         <h6 class="text-handy mb-1">{{ candidate?.registeredAtDate |
                             date:'mediumDate' }}, {{
                             candidate?.registeredAtDate | date:'mediumTime' }}</h6>
+                    </li>
+                    <li class="list-group-item ">
+                        <h6 class="text-muted mb-1">Manifesto</h6>
+                        <p class="mb-1">{{ candidate?.manifesto }}</p>
                     </li>
 
                 </ul>

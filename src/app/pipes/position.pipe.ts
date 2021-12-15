@@ -7,7 +7,7 @@ import { ElectivePositionEnum } from '../pages/fuuga/fuuga-vote/fuuga-vote-candi
 })
 export class PositionPipe implements PipeTransform {
 
-  transform(value: number, ...args: unknown[]) {
+  transform(value: any, ...args: unknown[]) {
     if (!value) {
       return;
     }
