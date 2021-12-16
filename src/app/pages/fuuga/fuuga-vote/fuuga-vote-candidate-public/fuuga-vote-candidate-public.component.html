@@ -1,0 +1,123 @@
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb ps-3 py-4 mb-0">
+            <li class="breadcrumb-item active h5 mb-0" aria-current="page">Candidates
+                <span class="ms-2 badge bg-handy">{{ totalCandidates | number}}</span>
+            </li>
+        </ol>
+    </nav>
+</div>
+
+
+<div class="container contain mb-3">
+    <div class="row">
+        <div class="col-sm-12 col-md-5 col-lg-5 col-xl-4">
+            <select (change)="onFilter($event)" class="form-select mb-2" aria-label=".form-select-sm example">
+                <option selected value="">Filter candidates by position</option>
+                <option *ngFor="let positionn of positions" [value]="positionn.value">{{ positionn.name }}</option>
+            </select>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+
+        <div *ngFor="let candidate of candidates" class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="card handy-card mb-2">
+                <img [src]="candidate.image" class="card-img-top candidate-img" alt="candidate_IMG">
+
+                <div class="card-body px-3">
+                    <h5 class="card-title text-handy">{{ candidate.position | positionFormat }}</h5>
+
+                    <div class="d-flex justify-content-between mb-1">
+                        <h6 class="mb-0 text-truncate"> {{
+                            candidate.voterId.firstName |
+                            titlecase }} {{ candidate.voterId.surName | titlecase }} </h6>
+                        <small class="mb-1 text-muted text-truncate">{{ candidate.voterId.kindred| titlecase }} </small>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <small class="mb-0 text-muted">{{ candidate.voterId.schoolName | titlecase }} | {{
+                            candidate.voterId.schoolLevel | titlecase }}</small>
+                    </div>
+
+
+
+                </div>
+                <div class="card-body pt-0">
+                    <h6 data-bs-toggle="modal" data-bs-target="#candidateModal"
+                        (click)="onSelectCandidate(candidate._id)" class="text-handy pointer mb-0">See
+                        details</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template [ngIf]="candidates.length <= 0">
+        <p class="text-center">No candidate(s) to show...</p>
+    </ng-template>
+
+</div>
+
+
+<div class="modal fade" id="candidateModal" tabindex="-1" aria-labelledby="candidateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-radius">
+            <div class="modal-header">
+                <h5 class="modal-title text-handy"> </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <img [src]="candidate?.image" class="card-img-top candidate-img" alt="candidate_IMG">
+
+            <div class="modal-body px-0 pb-4">
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Full name</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.voterId?.firstName | titlecase }} {{
+                            candidate?.voterId?.surName | titlecase }}
+                        </h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Candidate ID</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.referenceId | uppercase }} </h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Intending post</h6>
+                        <h6 class="text-green mb-1">{{ candidate?.position | positionFormat }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Kindred</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.voterId?.kindred | titlecase }} </h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">School</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.voterId?.schoolName | titlecase }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Level in school</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.voterId?.schoolLevel | titlecase }}</h6>
+                    </li>
+
+                    <!-- <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="text-muted mb-1">Registered at</h6>
+                        <h6 class="text-handy mb-1">{{ candidate?.registeredAtDate |
+                            date:'mediumDate' }}, {{
+                            candidate?.registeredAtDate | date:'mediumTime' }}</h6>
+                    </li> -->
+                    <li class="list-group-item ">
+                        <h6 class="text-muted mb-1">Manifesto</h6>
+                        <p class="mb-1">{{ candidate?.manifesto }}</p>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

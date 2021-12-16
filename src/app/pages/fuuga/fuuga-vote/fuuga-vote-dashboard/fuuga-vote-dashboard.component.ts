@@ -28,9 +28,8 @@ export class FuugaVoteDashboardComponent implements OnInit, OnDestroy {
 
 
 
-
   initContent() {
-    this.fuugaVoteService.getMetrics()
+    this.fuugaVoteService.getMetrics();
 
     this.metricsSub = this.fuugaVoteService.getMetricsUpdateListener()
       .subscribe(data => {
@@ -41,7 +40,7 @@ export class FuugaVoteDashboardComponent implements OnInit, OnDestroy {
         this.totalEstimatedVotes=data.totalEstimatedVotes;
       });
 
-    this.utilityService.setPageTitle('FUUGA voting dashboard')
+    this.utilityService.setPageTitle('Election dashboard')
   }
 
 

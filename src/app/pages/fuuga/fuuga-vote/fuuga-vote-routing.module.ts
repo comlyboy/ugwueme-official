@@ -61,6 +61,18 @@ const routes: Routes = [
       .then(m => m.FuugaVoteCandidateModule)
   },
   {
+    path: 'candidates_list',
+    // canLoad: [AuthGuard],
+    loadChildren: () => import('./fuuga-vote-candidate-public/fuuga-vote-candidate-public.module')
+      .then(m => m.FuugaVoteCandidatePublicModule)
+  },
+  {
+    path: 'cast_you_vote',
+    // canLoad: [AuthGuard],
+    loadChildren: () => import('./fuuga-vote-cast/fuuga-vote-cast.module')
+      .then(m => m.FuugaVoteCastModule)
+  },
+  {
     path: 'settings',
     canLoad: [AuthGuard],
     loadChildren: () => import('./fuuga-vote-setting/fuuga-vote-setting.module')

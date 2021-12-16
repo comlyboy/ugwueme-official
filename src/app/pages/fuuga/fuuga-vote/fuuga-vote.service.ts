@@ -157,6 +157,14 @@ export class FuugaVoteService {
   }
 
 
+  getCanditatesPublic(filterByPosition?: ElectivePositionEnum) {
+
+    const queryParameter = `?filter_by_position=${filterByPosition}`;
+
+    return this.http.get<{ data: { candidates: ICandidate[], totalCandidates: number } }>(`${this.API_URL}candidate/get_all/public${queryParameter}`);
+  }
+
+
 
 
   deleteCandidate(candidateId: string) {
