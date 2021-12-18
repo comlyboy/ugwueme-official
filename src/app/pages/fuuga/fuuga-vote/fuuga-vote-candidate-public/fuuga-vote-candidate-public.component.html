@@ -111,8 +111,8 @@
                             candidate?.registeredAtDate | date:'mediumTime' }}</h6>
                     </li> -->
                     <li class="list-group-item ">
-                        <h6 class="text-muted mb-1">Manifesto</h6>
-                        <p class="mb-1">{{ candidate?.manifesto }}</p>
+                        <h6 class="text-muted mb-2">Manifesto</h6>
+                        <div [innerHTML]="candidate?.manifesto" class="mb-1"></div>
                     </li>
 
                 </ul>

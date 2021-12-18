@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Subscription } from 'rxjs';
 
 import { DialogService } from 'src/app/service/dialog.service';
@@ -32,7 +33,63 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
   selectedImage: string | undefined;
   pickedFile: File;
 
-  
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: 'auto',
+    minHeight: '0',
+    maxHeight: 'auto',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Candidate manifesto...',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    toolbarHiddenButtons: [
+      [
+        // 'undo',
+        // 'redo',
+        // 'bold',
+        // 'italic',
+        // 'underline',
+        'strikeThrough',
+        'subscript',
+        'superscript',
+        // 'justifyLeft',
+        // 'justifyCenter',
+        // 'justifyRight',
+        // 'justifyFull',
+        // 'indent',
+        // 'outdent',
+        // 'insertUnorderedList',
+        // 'insertOrderedList',
+        'heading',
+        'fontName'
+      ],
+      [
+        'fontSize',
+        'textColor',
+        'backgroundColor',
+        'customClasses',
+        'link',
+        'unlink',
+        'insertImage',
+        'insertVideo',
+        // 'insertHorizontalRule',
+        'removeFormat',
+        'toggleEditorMode'
+      ],
+    ]
+    
+
+
+  };
+
+
   constructor(
     private fuugaVoteService: FuugaVoteService,
     private utilityService: UtilityService,
@@ -50,10 +107,12 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
       voterId: form.value.inputVoter
     };
 
-    this.fuugaVoteService.createCandidate(candidateData);
+    console.log(candidateData)
 
-    form.resetForm();
-    this.selectedImage = undefined;
+    // this.fuugaVoteService.createCandidate(candidateData);
+
+    // form.resetForm();
+    // this.selectedImage = undefined;
   }
 
   onSelectCandidate(candidateId: string) {

@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~12.2.13",
     "@angular/platform-browser-dynamic": "~12.2.13",
     "@angular/router": "~12.2.13",
+    "@kolkov/angular-editor": "^1.2.0",
     "ngx-device-detector": "^3.0.0",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.2.1",
