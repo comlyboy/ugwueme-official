@@ -107,12 +107,10 @@ export class FuugaVoteCandidateComponent implements OnInit, OnDestroy {
       voterId: form.value.inputVoter
     };
 
-    console.log(candidateData)
+    this.fuugaVoteService.createCandidate(candidateData);
 
-    // this.fuugaVoteService.createCandidate(candidateData);
-
-    // form.resetForm();
-    // this.selectedImage = undefined;
+    form.resetForm();
+    this.selectedImage = undefined;
   }
 
   onSelectCandidate(candidateId: string) {
