@@ -21,8 +21,6 @@ export class FuugaVoteCandidatePublicComponent implements OnInit {
   currentPage = 1;
   filterByPosition: ElectivePositionEnum
 
-  candidateSub: Subscription;
-
   positions = ElectivePositionArray;
 
 
@@ -40,8 +38,11 @@ export class FuugaVoteCandidatePublicComponent implements OnInit {
 
   onFilter(event: any) {
     this.filterByPosition = event.target.value;
-
-    this.fuugaVoteService.getCanditates(this.candidatesPerPage, this.currentPage, this.filterByPosition);
+    this.fuugaVoteService.getCanditatesPublic(this.filterByPosition)
+      .subscribe(data => {
+        this.candidates = data.data.candidates;
+        this.totalCandidates = data.data.totalCandidates;
+      });
   }
 
 
@@ -62,9 +63,6 @@ export class FuugaVoteCandidatePublicComponent implements OnInit {
   }
 
 
-  ngOnDestroy() {
-    this.candidateSub.unsubscribe();
-  }
-
+  
 
 }

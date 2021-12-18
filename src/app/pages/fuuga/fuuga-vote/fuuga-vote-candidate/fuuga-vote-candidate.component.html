@@ -51,7 +51,7 @@
 
 
                 </div>
-                <div class="card-body pt-0">
+                <div class="card-footer bg-transparent py-2">
                     <h6 data-bs-toggle="modal" data-bs-target="#candidateModal"
                         (click)="onSelectCandidate(candidate._id)" class="text-handy pointer mb-0">See
                         details</h6>
@@ -170,7 +170,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
             </div>
-            <img [src]="candidate?.image" class="card-img-top candidate-img" alt="candidate_IMG">
+            <img [src]="candidate?.image" class="card-img-top" alt="candidate_IMG">
 
             <div class="modal-body px-0 pb-4">
 
