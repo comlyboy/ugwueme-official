@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-fuuga-vote-cast',
@@ -8,6 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class FuugaVoteCastComponent implements OnInit {
 
   constructor() { }
+
+  onSubmit(form: NgForm) {
+
+    const secret = form.value.inputSecret.toLowerCase()
+
+    console.log(secret)
+  }
 
   ngOnInit(): void {
   }

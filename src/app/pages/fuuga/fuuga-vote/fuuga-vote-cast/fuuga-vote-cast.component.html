@@ -3,7 +3,59 @@
         <div class="card-header bg-transparent text-handy">Verify your Identity</div>
         <div class="card-body">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic minima suscipit quod
             accusantium, iusto, ullam laudantium impedit explicabo quia rerum quidem, dicta tenetur qui nostrum nemo non
-            magni. Alias, libero.</div>
+            magni. Alias, libero.
+        
+            <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+            class="btn btn-handy border-radius px-4 w-100 mb-2">Login</button></div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-radius">
+            <div class="modal-header">
+                <h5 class="modal-title text-handy">Verify Voter Identity</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (submit)="onSubmit(voterForm)" #voterForm="ngForm">
+                <div class="modal-body py-4">
+
+                    <div class="form-floating">
+                        <input
+                            [ngClass]="{'is-invalid animate__animated animate__headShake': secret.touched && secret.invalid}"
+                            class="form-control" id="floatingInput" type="text" name="inputSecret" ngModel
+                            placeholder="Firstname" #secret="ngModel" minlength="8"  maxlength="8" autocomplete="off" required />
+                        <label for="floatingInput">Your voting ID</label>
+                    </div>
+                    <div class="mb-1 text-center" *ngIf="secret.touched && secret.invalid">
+                        <small *ngIf="secret.errors?.required" class="text-danger">This field is required.</small>
+                        <small *ngIf="secret.touched && secret.errors?.minlength" class="text-danger"> Minimum
+                            8
+                            characters
+                        </small>
+                        <small *ngIf="secret.touched && secret.errors?.maxlength" class="text-danger"> Maximum
+                            8
+                            characters
+                        </small>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button [disabled]="voterForm.invalid" type="submit"
+                        class="btn btn-handy w-100 text-uppercase border-radius" data-bs-dismiss="modal"
+                        aria-label="Close">Submit</button>
+                </div>
+            </form>
+
+        </div>
     </div>
 
 </div>

@@ -10,6 +10,7 @@ import { NavigationService } from '../../service/navigation.service';
 import { NotificationService } from '../../components/notification/notification.service';
 import { UserSignInDto, UserSignUpDto } from './user.dto';
 import { IUser } from './user.interface';
+import { IVoter } from '../fuuga/fuuga-vote/fuuga-voter/fuuga-voter.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,13 @@ import { IUser } from './user.interface';
 export class AuthService {
   private API_URL = environment.API_URL;
 
+  private userIsCommittee = false;
   private userIsAuthenticated = false;
   private token?: string;
   private userId?: string;
 
   authenticationStatusListener = new Subject<boolean>();
+  isCommitteeListener = new Subject<boolean>();
 
   constructor(
     private http: HttpClient,
@@ -100,6 +103,12 @@ export class AuthService {
       }, error => {
         this.authenticationStatusListener.next(false);
       });
+  }
+
+
+
+  verifyVoter(votingSecret: string) {
+    return this.http.get<{ data: { voter: IVoter } }>(`${this.API_URL}/confirm/${votingSecret}`);
   }
 
 

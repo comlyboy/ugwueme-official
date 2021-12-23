@@ -9,7 +9,7 @@
 </div>
 
 
-<div class="container contain mb-3">
+<div class="container contain mb-2">
     <div class="row">
         <div class="col-sm-12 col-md-7 col-lg-8 col-xl-8">
             <select (change)="onFilter($event)" class="form-select mb-2" aria-label=".form-select-sm example">
@@ -30,7 +30,7 @@
     <div class="row">
 
         <div *ngFor="let candidate of candidates" class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-            <div class="card handy-card mb-2">
+            <div class="card handy-card my-2">
                 <img [src]="candidate.image" class="card-img-top candidate-img" alt="candidate_IMG">
 
                 <div class="card-body px-3">
@@ -47,8 +47,6 @@
                         <small class="mb-0 text-muted">{{ candidate.voterId.schoolName | titlecase }} | {{
                             candidate.voterId.schoolLevel | titlecase }}</small>
                     </div>
-
-
 
                 </div>
                 <div class="card-footer bg-transparent py-2">

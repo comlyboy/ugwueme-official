@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { FuugaVoteCastRoutingModule } from './fuuga-vote-cast-routing.module';
 import { FuugaVoteCastComponent } from './fuuga-vote-cast.component';
@@ -11,7 +12,8 @@ import { FuugaVoteCastComponent } from './fuuga-vote-cast.component';
   ],
   imports: [
     CommonModule,
-    FuugaVoteCastRoutingModule
+    FuugaVoteCastRoutingModule,
+    FormsModule
   ]
 })
 export class FuugaVoteCastModule { }
