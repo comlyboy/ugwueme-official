@@ -13,20 +13,12 @@ export class StorageService {
   /** Saves authentication data into browser storage.
   
   Returns `Void` */
-  saveAuthData(token: string, user: any, loggedUserType?: any) {
+  saveAuthData(token: string, user: any, isCommittee?: boolean) {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
-    // localStorage.setItem('loggedUserType', JSON.stringify(loggedUserType));
+    localStorage.setItem('isCommittee', JSON.stringify(isCommittee));
   }
 
-  saveBranchOBJ(branch: any) {
-    localStorage.setItem('branch', JSON.stringify(branch));
-  }
-
-  optimiseUserOBJ(user: any) {
-    localStorage.removeItem('user');
-    localStorage.setItem('user', JSON.stringify(user));
-  }
 
 
   /**
@@ -35,18 +27,19 @@ export class StorageService {
 * Returns `void`, if userOBJ and token are not awailable.
 */
   getAuthData() {
-    // return new Promise<{ token: string, user: IUser, authenticatedUserType: UserTypeEnum }>((resolve, reject) => {
     const token = localStorage.getItem('token');
     const user: any = localStorage.getItem('user');
+    const userIsCommittee: any = localStorage.getItem('isCommittee');
 
     const parsedUser: any = JSON.parse(user);
+    const isCommittee = JSON.parse(userIsCommittee) as boolean;
 
     //   if (user && token) {
     //     resolve({ token, user: parsedUser, authenticatedUserType: parsedLoggedUserType });
     //   }
     // });
     if (user && token) {
-      return { token, user: parsedUser };
+      return { token, user: parsedUser, isCommittee };
     }
     return;
 
@@ -54,25 +47,17 @@ export class StorageService {
 
 
   getUserOBJ() {
-    const user = localStorage.getItem('loggedUser');
+    const user = localStorage.getItem('user');
     if (!user) {
       return null;
     }
     return JSON.parse(user);
   }
 
-  getSelectedBranchOBJ(): any {
-    const branch = localStorage.getItem('branch');
-    if (!branch) {
-      return null;
-    }
-    return JSON.parse(branch);
-  }
-
 
 
   removeUserOBJ() {
-    localStorage.removeItem('loggedUser');
+    localStorage.removeItem('user');
   }
 
 
@@ -84,6 +69,7 @@ export class StorageService {
   removeAuthData() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('isCommittee');
   }
 
 }

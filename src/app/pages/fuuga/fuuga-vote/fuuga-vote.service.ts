@@ -165,6 +165,16 @@ export class FuugaVoteService {
   }
 
 
+  getCanditatesByOffice(position: ElectivePositionEnum) {
+    this.http.get<{ data: { candidates: ICandidate[], totalCandidates: number } }>(`${this.API_URL}candidate/get_all_by_position/${position}`)
+      .subscribe(data => {
+        this.candidatesUpdated.next({
+          totalCandidates: data.data.totalCandidates,
+          candidates: [...data.data.candidates]
+        });
+      });;
+  }
+
 
 
   deleteCandidate(candidateId: string) {

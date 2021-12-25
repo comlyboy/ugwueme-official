@@ -22,10 +22,9 @@ export class AppComponent {
 
     this.authService.automaticAuthenticateUser();
 
-    this.authStatusListenerSub = this.authService.authenticationStatusListener
-      .subscribe(isAuthenticated => {
-        this.userIsAuthenticated = isAuthenticated;
-      });
+    this.authService.authenticationStatusListener.subscribe(isAuthenticated => {
+      this.userIsAuthenticated = isAuthenticated;
+    });
 
   }
 

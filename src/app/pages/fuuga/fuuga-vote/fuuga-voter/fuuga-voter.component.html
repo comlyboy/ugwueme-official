@@ -103,6 +103,10 @@
                     <h5 (click)="onDeleteVoter(voter._id)" class="mb-0 px-3 py-2 delete text-muted"><i
                             class="bi bi-trash-fill"></i>
                     </h5>
+                    <h5 *ngIf="voter?.isVerified" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="onCopyVoterSecret(voter)" class="mb-0 px-3 py-2 action text-muted"><i
+                            class="bi bi-files"></i>
+                    </h5>
                     <h5 *ngIf="!voter?.isVerified" (click)="onVerifyVoter(voter._id)"
                         class="mb-0 px-3 py-2 action text-muted"><i class="bi bi-person-check-fill"></i>
                     </h5>

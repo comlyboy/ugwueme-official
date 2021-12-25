@@ -1,10 +1,34 @@
 <nav class="toolbar fixed-bottom bg-white">
-    <div class="d-flex align-items-center justify-content-around">
-        <a *ngFor="let page of pages" class="text-center" [routerLink]="[page.link]" routerLinkActive="current">
-            <div class="icon">
-                <i class="bi bi-{{ page.icon }}"></i>
-            </div>
-            <div class="navi-text">{{ page.title }}</div>
-        </a>
-    </div>
+
+    <ng-template [ngIf]="isCommittee">
+        <div class="d-flex align-items-center justify-content-around">
+            <a *ngFor="let page of pages" class="text-center" [routerLink]="[page.link]" routerLinkActive="current">
+                <div class="icon">
+                    <i class="bi bi-{{ page.icon }}"></i>
+                </div>
+                <div class="navi-text">{{ page.title }}</div>
+            </a>
+        </div>
+    </ng-template>
+
+    <ng-template [ngIf]="!isCommittee">
+        <div class="d-flex align-items-center justify-content-between">
+
+            <h6 (click)="onPrevious()" class="text-center action ripple-effect py-3 px-4 mb-0">
+                <div class="icon">
+                    <i class="bi bi-chevron-left"></i>
+                </div>
+            </h6>
+
+            <h6 class="mb-0 text-handy"> {{ this.selectedVotingPosition?.name }} </h6>
+
+            <h6 (click)="onNext()" class="text-center action ripple-effect py-3 px-4 mb-0">
+                <div class="icon">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+            </h6>
+
+        </div>
+    </ng-template>
+
 </nav>

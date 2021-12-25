@@ -1,19 +1,80 @@
 <div class="container pt-5">
-    <div class="card handy-card">
-        <div class="card-header bg-transparent text-handy">Verify your Identity</div>
-        <div class="card-body">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic minima suscipit quod
-            accusantium, iusto, ullam laudantium impedit explicabo quia rerum quidem, dicta tenetur qui nostrum nemo non
-            magni. Alias, libero.
-        
-            <button data-bs-toggle="modal" data-bs-target="#exampleModal"
-            class="btn btn-handy border-radius px-4 w-100 mb-2">Login</button></div>
-    </div>
+
+    <ng-template [ngIf]="!isReadyToVote">
+        <div class="card handy-card">
+            <div class="card-header bg-transparent text-handy">Voter`s Login</div>
+            <div class="card-body">
+
+                <h6 class="mb-0 text-center">To vote, you will need to login with your voting ID. <br> <br> Kindly click
+                    on
+                    the
+                    below botton to login</h6>
+
+            </div>
+            <div class="card-footer bg-transparent">
+                <!-- <button [disabled]="voterForm.invalid" type="submit"
+                    class="btn btn-handy w-100 text-uppercase border-radius">login</button> -->
+                <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    class="btn btn-handy border-radius px-4 w-100 mb-2">Proceed to login</button>
+            </div>
+        </div>
+    </ng-template>
+
+
+    <ng-template [ngIf]="isReadyToVote">
+        <div class="card handy-card mb-3">
+            <div class="card-header bg-transparent text-handy">Your profile</div>
+            <div class="card-body py-2">
+
+                <div class="d-flex justify-content-between">
+                    <app-avatar [size]="40" [data]="voter?.firstName + ' ' + voter?.surName"></app-avatar>
+                    <div class="text-end">
+                        <h6 class="text-handy mb-0">{{ voter?.firstName | titlecase }} {{ voter?.surName | titlecase }}
+                        </h6>
+                        <small class="text-muted">{{ voter?.kindred }}</small>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card handy-card mb-3">
+            <div class="card-header bg-transparent text-handy">Vote for {{ candidates[0]?.position | positionFormat }}
+            </div>
+            <div class="card-body px-0">
+
+                <!-- <ul class="list-group list-group-item-action list-group-flush">
+                    <li *ngFor="let candidate of candidates" class="list-group-item">{{ candidate.voterId.firstName |
+                        titlecase }} {{ candidate.voterId.surName |
+                        titlecase }}</li>
+                    <li *ngIf="candidates.length <= 0" class="list-group-item"><small>No candidate(s)</small></li>
+                </ul> -->
+                <div class="list-group list-group-flush">
+                    <div *ngFor="let candidate of candidates" class="form-check mx-3 mb-0    py-2 ripple-effect">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="{{ candidate._id }}">
+                        <label class="form-check-label" for="{{ candidate._id }}">
+                            {{ candidate.voterId.firstName |
+                            titlecase }} {{ candidate.voterId.surName |
+                            titlecase }}
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card handy-card">
+            <div class="card-body">
+                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                    class="btn btn-handy border-radius px-4 w-100">See all votes and submit</button>
+            </div>
+        </div>
+
+    </ng-template>
+
 
 </div>
-
-
-
-
 
 
 
@@ -21,18 +82,19 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content border-radius">
             <div class="modal-header">
-                <h5 class="modal-title text-handy">Verify Voter Identity</h5>
+                <h6 class="modal-title text-handy">Login voter</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form (submit)="onSubmit(voterForm)" #voterForm="ngForm">
+            <form (submit)="onSubmitLogin(voterForm)" #voterForm="ngForm">
                 <div class="modal-body py-4">
 
                     <div class="form-floating">
                         <input
                             [ngClass]="{'is-invalid animate__animated animate__headShake': secret.touched && secret.invalid}"
                             class="form-control" id="floatingInput" type="text" name="inputSecret" ngModel
-                            placeholder="Firstname" #secret="ngModel" minlength="8"  maxlength="8" autocomplete="off" required />
-                        <label for="floatingInput">Your voting ID</label>
+                            placeholder="Your voting ID e.g 543134DE" #secret="ngModel" minlength="8" maxlength="8"
+                            autocomplete="off" required />
+                        <label for="floatingInput">Your voting ID e.g 543134DE</label>
                     </div>
                     <div class="mb-1 text-center" *ngIf="secret.touched && secret.invalid">
                         <small *ngIf="secret.errors?.required" class="text-danger">This field is required.</small>
@@ -58,4 +120,16 @@
         </div>
     </div>
 
+</div>
+
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        ...
+    </div>
 </div>

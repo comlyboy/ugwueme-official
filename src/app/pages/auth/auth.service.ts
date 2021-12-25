@@ -24,7 +24,7 @@ export class AuthService {
   private userId?: string;
 
   authenticationStatusListener = new Subject<boolean>();
-  isCommitteeListener = new Subject<boolean>();
+  userisCommitteeListener = new Subject<boolean>();
 
   constructor(
     private http: HttpClient,
@@ -90,6 +90,7 @@ export class AuthService {
         this.token = token;
         this.userId = response.data.user._id;
         const user = response.data.user;
+        const isCommittee = true;
 
         if (!token) {
           return this.notificationsService.notify(`Login not successful!!!`);
@@ -97,8 +98,12 @@ export class AuthService {
 
         // this.notificationsService.notify(response.message);
         this.userIsAuthenticated = true;
-        this.saveAuthenticationData(token, user);
+        this.userIsCommittee = true;
+        this.saveAuthenticationData(token, user, isCommittee);
+
         this.authenticationStatusListener.next(true);
+        this.userisCommitteeListener.next(true);
+
         this.navigationService.goToDashboard();
       }, error => {
         this.authenticationStatusListener.next(false);
@@ -107,8 +112,29 @@ export class AuthService {
 
 
 
-  verifyVoter(votingSecret: string) {
-    return this.http.get<{ data: { voter: IVoter } }>(`${this.API_URL}/confirm/${votingSecret}`);
+  loginVoter(votingSecret: string) {
+    this.http.post<{ data: { token: string, voter: IVoter }, message: string }>(`${this.API_URL}voter/login`, { votingSecret })
+      .subscribe(response => {
+
+        const token = response.data.token;
+        this.token = token;
+        const user = response.data.voter;
+        const isCommittee = false;
+
+        if (!token) {
+          return this.notificationsService.notify(`Login not successful!!!`);
+        }
+
+        this.userIsCommittee = false;
+        this.userIsAuthenticated = true;
+        this.saveAuthenticationData(token, user, isCommittee);
+        this.authenticationStatusListener.next(true);
+        this.userisCommitteeListener.next(false);
+        this.notificationsService.notify(response.message);
+
+      }, error => {
+        this.authenticationStatusListener.next(false);
+      });;
   }
 
 
@@ -135,15 +161,17 @@ export class AuthService {
     this.userIsAuthenticated = false;
     this.authenticationStatusListener.next(false);
     this.clearAuthenticationData();
-    this.navigationService.goToLogin();
+    if (this.userIsCommittee) {
+      this.navigationService.goToLogin();
+    }
   }
 
 
   /**
 *  calls function that stores the authentication datas to the browser local storage
 */
-  private saveAuthenticationData(token: string, user: any) {
-    this.storageService.saveAuthData(token, user);
+  private saveAuthenticationData(token: string, user: any, isCommittee: boolean) {
+    this.storageService.saveAuthData(token, user, isCommittee);
   }
 
 
@@ -163,7 +191,9 @@ export class AuthService {
     this.token = authenticationInformation.token;
 
     this.userIsAuthenticated = true;
+    this.userIsCommittee = authenticationInformation.isCommittee;
     this.authenticationStatusListener.next(true);
+    this.userisCommitteeListener.next(authenticationInformation.isCommittee);
   }
 
 
@@ -178,7 +208,13 @@ export class AuthService {
     }
     const token = authData.token;
     const user = authData.user;
-    return { token, user };
+    const isCommittee = authData.isCommittee;
+
+    if (!isCommittee) {
+      // this.logout();
+      // return;
+    }
+    return { token, user, isCommittee };
   }
 
 
