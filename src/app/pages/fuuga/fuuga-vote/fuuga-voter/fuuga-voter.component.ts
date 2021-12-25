@@ -33,7 +33,7 @@ export class FuugaVoterComponent implements OnInit, OnDestroy {
   ) { }
 
   async onCopyVoterSecret(voter: IVoter) {
-    const text = `Hello ${voter.firstName} ${voter.surName}, here is your election authorization code *${voter.votingSecret}*. Ensure you do not share it to others. Thanks`
+    const text = `Hello ${voter.firstName} ${voter.surName}, here is your FUUGA election voting ID *${voter.votingSecret}*... Ensure you do not share it to others. Thanks`
 
     await window.navigator.clipboard.writeText(text);
     this.notificationService.notify(`Voting secret copied successfully! Kindly share it to the voter`, `info`);
