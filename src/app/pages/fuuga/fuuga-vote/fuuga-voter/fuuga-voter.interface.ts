@@ -18,6 +18,7 @@ export interface IVoter {
     votingSecret: string;
     referenceId: string;
     isVerified: boolean;
+    hasVoted: boolean;
     verifiedBy: IUser;
     verifiedAtDate: string;
     registeredAtDate: string;

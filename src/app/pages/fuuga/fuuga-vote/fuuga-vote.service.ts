@@ -10,6 +10,8 @@ import { IVoter, VoterDto } from './fuuga-voter/fuuga-voter.interface';
 import { IDashMetrics } from './fuuga-vote-dashboard/fuuga-vote-dashboard.inteface';
 import { ElectivePositionEnum, ICandidate, RegisterCandidateDto } from './fuuga-vote-candidate/fuuga-vote-candidate.interface';
 import { ISetting, SettingDto } from './fuuga-vote-setting/fuuga-vote-setting.interface';
+import { IVote } from './fuuga-votes/fuuga-votes.interface';
+import { AuthService } from '../../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,10 +37,16 @@ export class FuugaVoteService {
     totalCandidates: number
   }>();
 
+  private votesUpdated = new Subject<{
+    votes: IVote[],
+    totalVotes: number
+  }>();
+
 
   constructor(
     private http: HttpClient,
     private navigationService: NavigationService,
+    private authService: AuthService,
     private notificationService: NotificationService
   ) { }
 
@@ -66,7 +74,6 @@ export class FuugaVoteService {
         this.notificationService.notify(`${responseData.message}`);
       });
   }
-
 
 
   getVotersUpdateListener() {
@@ -172,9 +179,8 @@ export class FuugaVoteService {
           totalCandidates: data.data.totalCandidates,
           candidates: [...data.data.candidates]
         });
-      });;
+      });
   }
-
 
 
   deleteCandidate(candidateId: string) {
@@ -186,6 +192,52 @@ export class FuugaVoteService {
   };
 
 
+
+
+  castVote(position: ElectivePositionEnum, candidateId: string) {
+
+    const newVote = { position, candidateId }
+
+    this.http
+      .post<{ message: string }>(`${this.API_URL}vote/cast`, newVote)
+      .subscribe(responseData => {
+        this.notificationService.notify(`${responseData.message}`);
+      });
+  }
+
+
+  getVotesUpdateListener() {
+    return this.votesUpdated.asObservable();
+  }
+  getVotes() {
+    this.http.get<{ data: { votes: IVote[], totalVotes: number } }>(`${this.API_URL}vote/get_all`)
+      .subscribe(data => {
+        this.votesUpdated.next({
+          totalVotes: data.data.totalVotes,
+          votes: [...data.data.votes]
+        });
+      });
+  }
+
+
+  getVotesByVoter() {
+    this.http.get<{ data: { votes: IVote[], totalVotes: number } }>(`${this.API_URL}vote/get_all_by_voter`)
+      .subscribe(data => {
+        this.votesUpdated.next({
+          totalVotes: data.data.totalVotes,
+          votes: [...data.data.votes]
+        });
+      });
+  }
+
+  submitAllVotes() {
+    this.http.get<{ message: string }>(`${this.API_URL}vote/submit`)
+      .subscribe(data => {
+        this.notificationService.notify(data.message);
+        this.authService.logout()
+        this.navigationService.goToFuugaHome();
+      });
+  }
 
 
 

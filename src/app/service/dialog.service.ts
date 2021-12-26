@@ -36,14 +36,14 @@ export class DialogService {
   }
 
 
-  // async deleteRepairRecordDialog(transactionId: string) {
-  //   try {
-  //     const result = await this.OpenDialog('Delete transaction?');
-  //     if (result.value) {
-  //       this.repairRecordService.deleteTransaction(transactionId);
-  //     }
-  //   } catch (error) { }
-  // }
+  async submitVotesDialog() {
+    try {
+      const result = await this.OpenDialog('You sure want to submit all votes?');
+      if (result.value) {
+        this.fuugaVoteService.submitAllVotes();
+      }
+    } catch (error) { }
+  }
 
 
   // async deleteServiceRecordDialog(recordId: string) {

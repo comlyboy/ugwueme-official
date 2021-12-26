@@ -212,7 +212,7 @@ export class AuthService {
 
     if (!isCommittee) {
       // this.logout();
-      // return;
+      return;
     }
     return { token, user, isCommittee };
   }

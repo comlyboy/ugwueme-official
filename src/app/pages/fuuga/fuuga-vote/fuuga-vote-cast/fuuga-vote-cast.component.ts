@@ -8,7 +8,8 @@ import { FuugaVoteService } from '../fuuga-vote.service';
 import { UtilityService } from 'src/app/service/utility.service';
 import { IVoter } from '../fuuga-voter/fuuga-voter.interface';
 import { StorageService } from 'src/app/service/storage.service';
-import { ICandidate } from '../fuuga-vote-candidate/fuuga-vote-candidate.interface';
+import { ElectivePositionEnum, ICandidate } from '../fuuga-vote-candidate/fuuga-vote-candidate.interface';
+import { IVote } from '../fuuga-votes/fuuga-votes.interface';
 
 @Component({
   selector: 'app-fuuga-vote-cast',
@@ -17,10 +18,17 @@ import { ICandidate } from '../fuuga-vote-candidate/fuuga-vote-candidate.interfa
 })
 export class FuugaVoteCastComponent implements OnInit {
   isReadyToVote = false;
+
   voter: IVoter;
+
+  voteSub: Subscription;
   candidateSub: Subscription;
+
   candidates: ICandidate[] = [];
   totalCandidates: number;
+
+  totalVotes = 0;
+  votes: IVote[] = [];
 
   constructor(
     private authService: AuthService,
@@ -31,13 +39,24 @@ export class FuugaVoteCastComponent implements OnInit {
   ) { }
 
 
-  onSelectCandidate(candidateId: string) {
+  onSelectCandidate(candidateId: string, position: ElectivePositionEnum) {
+    this.fuugaVoteService.castVote(position, candidateId);
+  }
 
+  onSeeAllVotes() {
+    this.fuugaVoteService.getVotesByVoter()
   }
 
 
+  onSubmitVotes() {
+    this.dialogService.submitVotesDialog();
+  }
+
 
   onSubmitLogin(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
     const secret = form.value.inputSecret.toLowerCase() as string
     this.authService.loginVoter(secret);
   }
@@ -59,6 +78,22 @@ export class FuugaVoteCastComponent implements OnInit {
         this.totalCandidates = data.totalCandidates;
       });
 
+    this.voteSub = this.fuugaVoteService.getVotesUpdateListener()
+      .subscribe(data => {
+        this.votes = data.votes;
+        this.totalVotes = data.totalVotes;
+      });
+
+  }
+
+
+  ngOnDestroy() {
+    if (this.voteSub) {
+      this.voteSub.unsubscribe();
+    }
+    if (this.candidateSub) {
+      this.candidateSub.unsubscribe();
+    }
   }
 
 }

@@ -52,7 +52,8 @@
                 </ul> -->
                 <div class="list-group list-group-flush">
                     <div *ngFor="let candidate of candidates" class="form-check mx-3 mb-0    py-2 ripple-effect">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="{{ candidate._id }}">
+                        <input (change)="onSelectCandidate(candidate._id, candidate.position)" class="form-check-input"
+                            type="radio" name="flexRadioDefault" id="{{ candidate._id }}">
                         <label class="form-check-label" for="{{ candidate._id }}">
                             {{ candidate.voterId.firstName |
                             titlecase }} {{ candidate.voterId.surName |
@@ -66,8 +67,9 @@
 
         <div class="card handy-card">
             <div class="card-body">
-                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                    class="btn btn-handy border-radius px-4 w-100">See all votes and submit</button>
+                <button (click)="onSeeAllVotes()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight" class="btn btn-handy border-radius px-4 w-100">See all votes and
+                    submit</button>
             </div>
         </div>
 
@@ -126,10 +128,25 @@
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
-        <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+        <h5 id="offcanvasRightLabel">Votes <span class="ms-2 badge bg-handy">{{ totalVotes | number}}</span>
+        </h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
-        ...
+    <div class="offcanvas-body px-0">
+        <ul class="list-group list-group-flush">
+            <li *ngFor="let vote of votes" class="list-group-item">
+                <h6 class="text-handy mb-0">{{ vote.position | positionFormat }}</h6>
+                <small class="text-muted mb-0">{{ vote.candidateId.voterId.firstName | titlecase }} {{
+                    vote.candidateId.voterId.surName | titlecase }}</small>
+            </li>
+            <li *ngIf="votes.length <= 0" class="list-group-item text-center">
+                <small class="mb-0">No vote(s) yet...</small>
+            </li>
+        </ul>
+    </div>
+    <div class="offcanvas-footer p-3">
+        <button (click)="onSubmitVotes()" data-bs-dismiss="offcanvas" aria-label="Close"
+            class="btn btn-handy w-100 text-uppercase border-radius">Submit your
+            votes</button>
     </div>
 </div>

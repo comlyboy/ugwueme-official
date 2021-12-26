@@ -14,6 +14,10 @@ export class NavigationService {
   ) { }
 
 
+  goToFuugaHome() {
+    this.router.navigate(['/fuuga']);
+  }
+
   goToLogin() {
     this.router.navigate(['/fuuga/election']);
   }
