@@ -144,9 +144,12 @@
             </li>
         </ul>
     </div>
-    <div class="offcanvas-footer p-3">
-        <button (click)="onSubmitVotes()" data-bs-dismiss="offcanvas" aria-label="Close"
-            class="btn btn-handy w-100 text-uppercase border-radius">Submit your
+    <div class="offcanvas-footer text-center p-3">
+        <small *ngIf="votes.length !== 11" class="text-center">If you can see this text and the below button deosnt
+            work, it means your vote is not
+            complete. Close this and cross-check your vote <br> Your votes must be 11 in number.</small>
+        <button (click)="onSubmitVotes()" [disabled]="votes.length !== 11" data-bs-dismiss="offcanvas"
+            aria-label="Close" class="btn btn-handy w-100 text-uppercase border-radius mt-2">Submit all your
             votes</button>
     </div>
 </div>
