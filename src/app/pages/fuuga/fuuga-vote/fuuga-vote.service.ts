@@ -97,6 +97,25 @@ export class FuugaVoteService {
   }
 
 
+  getVotersReport(votersPerPage?: number, currentPage?: number) {
+    this.votersPerPage = votersPerPage;
+    this.currentPage = currentPage;
+
+    const queryParameter = `?pagesize=${votersPerPage}&page=${currentPage}`;
+
+    this.http
+      .get<{ data: { voters: IVoter[], totalVoters: number } }>(`${this.API_URL}voter/report${queryParameter}`)
+      .subscribe(data => {
+        this.votersUpdated.next({
+          totalVoters: data.data.totalVoters,
+          voters: [...data.data.voters]
+        });
+        // this.notificationService.notify(`${data.message}`);
+      });
+  }
+
+
+
 
   verifyVoter(voterId: string) {
     this.http

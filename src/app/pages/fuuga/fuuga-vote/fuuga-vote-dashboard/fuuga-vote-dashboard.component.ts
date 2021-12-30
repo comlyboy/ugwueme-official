@@ -15,6 +15,7 @@ export class FuugaVoteDashboardComponent implements OnInit, OnDestroy {
   isLoading = false;
 
   totalVoters = 0;
+  totalSubmittedVoter = 0;
   totalVerifiedVoters = 0;
   totalVotes = 0;
   totalCandidates = 0;
@@ -37,6 +38,7 @@ export class FuugaVoteDashboardComponent implements OnInit, OnDestroy {
         this.totalVotes = data.totalVotes;
         this.totalVerifiedVoters = data.totalVerifiedVoters;
         this.totalCandidates = data.totalCandidates;
+        this.totalSubmittedVoter = data.totalSubmittedVoter;
         this.totalEstimatedVotes=data.totalEstimatedVotes;
       });
 

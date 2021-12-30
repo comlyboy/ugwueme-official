@@ -1,0 +1,15 @@
+.badge {
+    border-radius: 7px;
+}
+
+.unverified {
+    background-color: lighten(#ac1121, 53%);
+    color: #dc3545;
+    border: #dc3545 solid 1px;
+}
+
+.verified {
+    background-color: lighten(#36a556, 48%);
+    color: #3bb35d;
+    border: #12b886 solid 1px;
+}

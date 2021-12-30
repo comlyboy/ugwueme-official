@@ -56,6 +56,23 @@
                 <div class="card-body py-3">
                     <div class="d-flex justify-content-between">
                         <div class="display-4 m-0">
+                            <i class="bi bi-person-check-fill"></i>
+                        </div>
+                        <div class="text-end">
+                            <div class="h6 mb-3">Who submitted vote</div>
+                            <div class="h5 text-handy mb-0">{{ totalSubmittedVoter | number }} of {{
+                                totalVerifiedVoters | number }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="card handy-card border-0 text-muted my-2">
+                <div class="card-body py-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="display-4 m-0">
                             <i class="bi bi-person-rolodex"></i>
                         </div>
                         <div class="text-end">
@@ -103,7 +120,7 @@
 </div>
 
 
-<div class="container-fluid pb-3 footer-clearfix">
+<!-- <div class="container-fluid pb-3 footer-clearfix">
     <div class="card handy-card border-0 text-muted my-2">
         <div class="card-header bg-transparent">
             <h6 class="mb-0 text-handy">Voting Chart</h6>
@@ -112,4 +129,4 @@
             Here will contain a chart
         </div>
     </div>
-</div>
+</div> -->

@@ -22,4 +22,5 @@ export interface IVoter {
     verifiedBy: IUser;
     verifiedAtDate: string;
     registeredAtDate: string;
+    voteCounts?: any[];
 }
