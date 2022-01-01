@@ -97,23 +97,6 @@ export class FuugaVoteService {
   }
 
 
-  getVotersReport(votersPerPage?: number, currentPage?: number) {
-    this.votersPerPage = votersPerPage;
-    this.currentPage = currentPage;
-
-    const queryParameter = `?pagesize=${votersPerPage}&page=${currentPage}`;
-
-    this.http
-      .get<{ data: { voters: IVoter[], totalVoters: number } }>(`${this.API_URL}voter/report${queryParameter}`)
-      .subscribe(data => {
-        this.votersUpdated.next({
-          totalVoters: data.data.totalVoters,
-          voters: [...data.data.voters]
-        });
-        // this.notificationService.notify(`${data.message}`);
-      });
-  }
-
 
 
 
@@ -248,6 +231,19 @@ export class FuugaVoteService {
         });
       });
   }
+
+  
+  getVotesResult() {
+    this.http
+      .get<{ data: { votes: IVote[], totalVotes: number } }>(`${this.API_URL}vote/result`)
+      .subscribe(data => {
+        this.votesUpdated.next({
+          totalVotes: data.data.totalVotes,
+          votes: [...data.data.votes]
+        });
+      });
+  }
+
 
   submitAllVotes() {
     this.http.get<{ message: string }>(`${this.API_URL}vote/submit`)

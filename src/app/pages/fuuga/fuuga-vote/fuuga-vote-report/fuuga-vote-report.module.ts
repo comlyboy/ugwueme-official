@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FuugaVoteReportRoutingModule } from './fuuga-vote-report-routing.module';
 import { FuugaVoteReportComponent } from './fuuga-vote-report.component';
 import { PaginatorModule } from 'src/app/components/paginator/paginator.module';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import { PaginatorModule } from 'src/app/components/paginator/paginator.module';
   imports: [
     CommonModule,
     FuugaVoteReportRoutingModule,
-    PaginatorModule
+    PipesModule
   ]
 })
 export class FuugaVoteReportModule { }

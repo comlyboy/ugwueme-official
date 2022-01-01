@@ -41,7 +41,7 @@ export const ElectivePositionArray = [
     { name: 'General Secretary', value: ElectivePositionEnum.generalSecretary },
     { name: 'Assistant General Secretary', value: ElectivePositionEnum.assGeneralSecretary },
     { name: 'National Coordinator', value: ElectivePositionEnum.nationalCoordinator },
-    { name: 'Financial Secretaty', value: ElectivePositionEnum.financialSecretary },
+    { name: 'Financial Secretary', value: ElectivePositionEnum.financialSecretary },
     { name: 'Treasurer', value: ElectivePositionEnum.treasurer },
     { name: 'Academic Coordinator', value: ElectivePositionEnum.academicCoordinator },
     { name: 'Director of Social', value: ElectivePositionEnum.directorOfSocials },

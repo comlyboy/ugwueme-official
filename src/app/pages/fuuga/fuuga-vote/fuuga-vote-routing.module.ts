@@ -55,8 +55,8 @@ const routes: Routes = [
       .then(m => m.FuugaVotesModule)
   },
   {
-    path: 'reports',
-    canLoad: [AuthGuard],
+    path: 'results',
+    // canLoad: [AuthGuard],
     loadChildren: () => import('./fuuga-vote-report/fuuga-vote-report.module')
       .then(m => m.FuugaVoteReportModule)
   },

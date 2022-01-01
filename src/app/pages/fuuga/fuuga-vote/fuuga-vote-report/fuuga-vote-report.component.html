@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb ps-3 py-4 mb-0">
-            <li class="breadcrumb-item active h5 mb-0" aria-current="page">Reports</li>
+            <li class="breadcrumb-item active h5 mb-0" aria-current="page">Election results</li>
         </ol>
     </nav>
 </div>
@@ -9,49 +9,26 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div *ngFor="let voter of voters" class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-            <div class="card handy-card mb-2">
-                <div class="card-body px-3 py-2">
-                    <div class="d-flex justify-content-between">
-                        <h5 class="text-handy pointer text-truncate">{{
-                            voter.firstName |
-                            titlecase }} {{ voter.surName | titlecase }}<span>
-                                <i class="bi bi-arrow-up-right-circle ms-2"></i></span></h5>
+        <div *ngFor="let position of positions" class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
 
-                        <!-- <div class="text-end">
-                            <h6 class="text-muted">{{ voter.voteCounts | number }} </h6>
-                        </div> -->
-                    </div>
+            <div class="card handy-card my-2">
+                <div class="card-header bg-transparent">
+                    <h6 class="mb-0 text-handy">{{ position.name | positionFormat }}</h6>
+                </div>
+                <div class="card-body py-1 px-0">
 
-                    <div class="d-flex justify-content-between mb-1">
-                        <small class="mb-1 text-muted text-truncate">{{ voter.kindred | titlecase }} </small>
-                        <small class="mb-1 text-muted text-truncate">{{ voter.voteCounts?.length | number }} votes
-                        </small>
-                    </div>
-                    <div class="d-flex justify-content-end mb-1">
-                        <!-- <small class="mb-1 text-muted text-truncate">{{ voter.kindred | titlecase }} </small>
-                        <small class="mb-1 text-muted text-truncate">{{ voter.kindred | titlecase }} </small> -->
-                        <div class="h6 text-green mb-0">
-                            <span [ngClass]="{'verified':  voter?.hasVoted, 'unverified':  !voter?.hasVoted}"
-                                class="badge px-3 m-0">{{ voter?.hasVoted ? 'Has submitted vote' : 'Has not submitted
-                                vote'}}
-                            </span>
-                            <!-- <span class="ms-2" *ngIf="!voter?.isVerified"><a class="small font-weight-bold">
-                                    Verify</a></span> -->
-                        </div>
-                    </div>
+                    <ul class="list-group list-group-flush">
+                        <ng-template ngFor let-vote [ngForOf]="votesNoDuplicate">
 
-
-
+                            <li *ngIf="vote.position === position.value && vote.candidateId._id"
+                                class="list-group-item d-flex justify-content-between">
+                                <h6 class="text-muted mb-1">{{ vote.candidateId.voterId.firstName }}</h6>
+                                <h6 class="text-handy mb-1">{{ countVote(votes, vote.candidateId) }}</h6>
+                            </li>
+                        </ng-template>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="container mt-3 footer-clearfix">
-    <app-paginator [length]="totalVoters" [currentDataLength]="voters.length" [dataPerPage]="votersPerPage"
-        [currentPage]="currentPage" (pageChange)='onChangePage($event)'>
-    </app-paginator>
 </div>
