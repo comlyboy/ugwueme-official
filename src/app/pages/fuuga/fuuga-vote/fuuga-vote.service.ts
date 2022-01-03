@@ -235,11 +235,11 @@ export class FuugaVoteService {
   
   getVotesResult() {
     this.http
-      .get<{ data: { votes: IVote[], totalVotes: number } }>(`${this.API_URL}vote/result`)
+      .get<{ data: { candidates: ICandidate[], totalCandidates: number } }>(`${this.API_URL}vote/result`)
       .subscribe(data => {
-        this.votesUpdated.next({
-          totalVotes: data.data.totalVotes,
-          votes: [...data.data.votes]
+        this.candidatesUpdated.next({
+          totalCandidates: data.data.totalCandidates,
+          candidates: [...data.data.candidates]
         });
       });
   }

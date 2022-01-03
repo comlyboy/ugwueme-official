@@ -4,7 +4,7 @@ import { IVoter } from "../fuuga-voter/fuuga-voter.interface";
 export interface IVote {
     _id: string;
     position: ElectivePositionEnum;
-    candidateId: ICandidate;
+    candidateId: any;
     voterId: IVoter;
     schoolName: string;
     schoolLevel: string;

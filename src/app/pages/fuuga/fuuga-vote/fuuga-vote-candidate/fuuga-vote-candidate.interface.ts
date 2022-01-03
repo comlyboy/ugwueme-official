@@ -13,10 +13,11 @@ export interface ICandidate {
     _id: string;
     image: string;
     position: ElectivePositionEnum;
-    voterId: IVoter;
+    voterId: any;
     manifesto: string;
     referenceId: string;
     addedBy: IUser;
+    voteCount: number;
     registeredAtDate: string;
 }
 

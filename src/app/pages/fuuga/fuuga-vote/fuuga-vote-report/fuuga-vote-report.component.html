@@ -18,12 +18,13 @@
                 <div class="card-body py-1 px-0">
 
                     <ul class="list-group list-group-flush">
-                        <ng-template ngFor let-vote [ngForOf]="votesNoDuplicate">
+                        <ng-template ngFor let-candidate [ngForOf]="candidates">
 
-                            <li *ngIf="vote.position === position.value && vote.candidateId._id"
+                            <li *ngIf="candidate.position === position.value && candidate._id"
                                 class="list-group-item d-flex justify-content-between">
-                                <h6 class="text-muted mb-1">{{ vote.candidateId.voterId.firstName }}</h6>
-                                <h6 class="text-handy mb-1">{{ countVote(votes, vote.candidateId) }}</h6>
+                                <h6 class="text-muted mb-1">{{ candidate.voterId.firstName | titlecase }} {{
+                                    candidate.voterId.surName | titlecase }}</h6>
+                                <h6 class="text-handy mb-1">{{ countVote(votes, candidate._id) }}</h6>
                             </li>
                         </ng-template>
                     </ul>

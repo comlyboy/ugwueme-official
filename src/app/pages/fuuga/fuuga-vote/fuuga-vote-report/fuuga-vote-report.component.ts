@@ -12,8 +12,8 @@ import { IVote } from '../fuuga-votes/fuuga-votes.interface';
 })
 export class FuugaVoteReportComponent implements OnInit, OnDestroy {
   votes: IVote[] = [];
-  votesNoDuplicate: IVote[] = [];
-  totalVoters = 0;
+  candidates: ICandidate[] = [];
+  totalCandidates = 0;
 
   positions = ElectivePositionArray;
 
@@ -40,33 +40,24 @@ export class FuugaVoteReportComponent implements OnInit, OnDestroy {
 
   initContent() {
     this.fuugaVoteService.getVotesResult();
+    this.fuugaVoteService.getVotes();
+
+    this.recordSub = this.fuugaVoteService.getCandidatesUpdateListener()
+      .subscribe(data => {
+        this.candidates = data.candidates;
+      });
 
     this.recordSub = this.fuugaVoteService.getVotesUpdateListener()
       .subscribe(data => {
-        console.log(data);
-        this.pickDuplicate(data.votes);
-
-        // this.totalVoters = data.totalVoters!;
+        this.votes = data.votes;
       });
 
     this.utilityService.setPageTitle('Voters` result • FUUGA');
   }
 
 
-  pickDuplicate(arr: IVote[]) {
-    const res = [];
-    for (let i = 0; i < arr.length; i++) {
-      // if (arr.indexOf(arr[i]) !== arr.lastIndexOf(arr[i])) {
-      //   if (!res.includes(arr[i])) {
-      //     res.push(arr[i]);
-      //   };
-      // };
-    };
-    this.votes = res;
-  };
-
-  countVote(votes: IVote[], candidate: ICandidate) {
-    return votes.filter(item => item.candidateId._id === candidate._id).length
+  countVote(votes: IVote[], candidate: string) {
+    return votes.filter(item => item.candidateId._id === candidate).length
   }
 
 
